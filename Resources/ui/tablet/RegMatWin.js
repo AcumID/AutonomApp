@@ -64,28 +64,19 @@ for (var i = 0; i < 12; i++) {
 populator(tbl_data);
 populator(tbl_data_selected);
 
-
-//This wont work in webapp, but will in IOS
-if(platform === "iPad"){
-	
-	var searchBar = Titanium.UI.createSearchBar({
-	barColor: '#385292',
-	showCancel: false 
-});	
-alert("Det var iPad");
-	
-	}else{
-	var searchBar = Titanium.UI.createSearchBar({
-	barColor: '#385292',
-	showCancel: false 
-	//To be used in webapp
-/*	var searchBar = Ti.UI.createTextField({
- 	 borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
- 	 center: 50,
- 	 width: 250, 
- 	 height: 40 */
+if(platform === "mobileweb"){
+	var searchBar = Ti.UI.createTextField({
+ 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+ 		center: 50,
+ 		width: 250, 
+ 		height: 40 
 	});
-};
+} else {
+	var searchBar = Titanium.UI.createSearchBar({
+		barColor: '#385292',
+		showCancel: false
+	});
+}
 scrollView.add(searchBar);
 
 var browseButton = Ti.UI.createButton({
@@ -100,9 +91,12 @@ self.rightNavButton = browseButton;
 var tableView = Titanium.UI.createTableView({
 	headerTitle:"Materialeforslag",
 	search: searchBar,
-	//this  is removed in  web preview
-	style:Titanium.UI.iPhone.TableViewStyle.GROUPED
+
 });
+if(platform === "ipad"){
+	tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+}
+
 tableView.setData(tbl_data);
 scrollView.add(tableView);
 
@@ -111,9 +105,11 @@ scrollView.add(tableView);
 
 var tableViewSelected = Titanium.UI.createTableView({
 	headerTitle:"Materialeliste",
-	//this  is removed in  web preview
-	style:Titanium.UI.iPhone.TableViewStyle.GROUPED
 });
+if(platform === "ipad"){
+	tableViewSelected.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
+}
+
 tableViewSelected.setData(tbl_data_selected);
 scrollView2.add(tableViewSelected);
 
