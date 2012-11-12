@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ApplicationMods.m \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ApplicationMods.h
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/ApplicationMods.m \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/ApplicationMods.h

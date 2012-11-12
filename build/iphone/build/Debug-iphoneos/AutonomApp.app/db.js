@@ -1,1 +1,1 @@
-/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomApp/Resources/db.js
+/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/Resources/db.js

@@ -1,1 +1,1 @@
-/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomApp/Resources/ui/common/ApplicationTabGroup.js
+/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/Resources/ui/common/ApplicationTabGroup.js

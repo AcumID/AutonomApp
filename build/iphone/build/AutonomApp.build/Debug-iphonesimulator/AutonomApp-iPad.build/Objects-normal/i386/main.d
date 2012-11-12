@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/main.m
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/main.m

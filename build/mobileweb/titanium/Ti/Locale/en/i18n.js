@@ -1,1 +1,0 @@
-define({"home": "Home", "newWindow": "New Window", "openWindow": "Open New Window", "settings": "Settings"});
