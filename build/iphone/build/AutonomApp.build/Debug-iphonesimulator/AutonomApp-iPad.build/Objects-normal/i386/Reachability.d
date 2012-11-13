@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/ASI/Reachability.m \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/ASI/Reachability.h
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/Reachability.m \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/Reachability.h

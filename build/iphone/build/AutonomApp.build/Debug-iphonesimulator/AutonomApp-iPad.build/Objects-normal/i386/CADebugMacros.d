@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/CADebugMacros.cpp \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/CADebugMacros.h
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/CADebugMacros.cpp \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/CADebugMacros.h

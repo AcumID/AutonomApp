@@ -1,21 +1,21 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMDocumentProxy.m \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMDocumentProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiBase.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiThreading.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiPublicAPI.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiEvaluator.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/KrollContext.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/headers/TiCore/TiCore.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMDocumentProxy.m \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMDocumentProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiBase.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiThreading.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiPublicAPI.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiEvaluator.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollContext.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/headers/TiCore/TiCore.h \
   headers/TiCore/Ti.h headers/TiCore/TiBase.h \
   headers/TiCore/TiContextRef.h headers/TiCore/TiObjectRef.h \
   headers/TiCore/TiValueRef.h headers/TiCore/WebKitAvailability.h \
   headers/TiCore/TiStringRef.h headers/TiCore/TiStringRefCF.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/headers/TiCore/TiContextRefPrivate.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/KrollCallback.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/KrollObject.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/GDataXMLNode.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/headers/TiCore/TiContextRefPrivate.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollCallback.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollObject.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/GDataXMLNode.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/tree.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xmlversion.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xmlexports.h \
@@ -39,24 +39,24 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/SAX2.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xpath.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xpathInternals.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMNodeProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMNodeListProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMTextNodeProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TIDOMCharacterDataProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMElementProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMAttrProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMCDATANodeProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMCommentProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMPIProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMDocFragProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TIDOMDOMImplementationProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TIDOMDocumentTypeProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMEntityRefProxy.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiUtils.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiColor.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDimension.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/WebFont.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiFile.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiBuffer.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiBlob.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/TiDOMValidator.h
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMNodeProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMNodeListProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMTextNodeProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TIDOMCharacterDataProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMElementProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMAttrProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMCDATANodeProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMCommentProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMPIProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMDocFragProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TIDOMDOMImplementationProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TIDOMDocumentTypeProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMEntityRefProxy.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiUtils.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiColor.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDimension.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/WebFont.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiFile.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiBuffer.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiBlob.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMValidator.h

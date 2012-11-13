@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/AFOpenFlow/AFOpenFlowView.m \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/AFOpenFlow/AFOpenFlowView.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/AFOpenFlow/AFItemView.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/AFOpenFlow/AFOpenFlowConstants.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/AFOpenFlow/AFUIImageReflection.h
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/AFOpenFlow/AFOpenFlowView.m \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/AFOpenFlow/AFOpenFlowView.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/AFOpenFlow/AFItemView.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/AFOpenFlow/AFOpenFlowConstants.h \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/AFOpenFlow/AFUIImageReflection.h

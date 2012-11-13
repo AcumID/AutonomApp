@@ -1,1 +1,1 @@
-/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/Resources/ui/tablet/WelcomeWin.js
+/Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/Resources/ui/tablet/WelcomeWin.js

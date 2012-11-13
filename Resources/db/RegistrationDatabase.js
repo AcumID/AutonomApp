@@ -4,6 +4,7 @@ function RegistrationDatabase() {
 	
 	var db = Ti.Database.open('registration');
 	db.execute('CREATE TABLE IF NOT EXISTS regmaterials (id INTEGER PRIMARY KEY, stocknumber INTEGER, name TEXT, unit TEXT, assignments TEXT, image BLOB, price REAL, number REAL)');
+	db.execute('DELETE FROM regmaterials'); //This will delete all data in table
 	
 	//Add a dataelement to the database
 	api.addDataElement=function(dataElement, numberOfElements){
@@ -52,7 +53,8 @@ function RegistrationDatabase() {
 				unit: resultSet.fieldByName('unit'),
 				assignments: resultSet.fieldByName('assignments'),
 				image: resultSet.fieldByName('image'),
-				price: resultSet.fieldByName('price')
+				price: resultSet.fieldByName('price'),
+				number: resultSet.fieldByName('number')
 			};
 		}
 		return result;
@@ -74,6 +76,11 @@ function RegistrationDatabase() {
 			};
 		}
 		return result;
+	};
+	
+	api.updateDataElementId = function(dataElement,id){
+		db.execute('UPDATE regmaterials SET id = '+id+' WHERE name = "'+dataElement.name+'"');
+		return db.rowsAffected; //return the number of rows affected by the last query
 	};
 	
 	api.updateDataElement = function(dataElement){

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/UIImage+Alpha.m \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/build/iphone/Classes/UIImage+Alpha.h
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/UIImage+Alpha.m \
+  /Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/UIImage+Alpha.h

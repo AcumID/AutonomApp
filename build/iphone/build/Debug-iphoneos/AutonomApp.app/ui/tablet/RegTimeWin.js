@@ -1,1 +1,1 @@
-/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AutonomAppGit/Resources/ui/tablet/RegTimeWin.js
+/Users/MikkeliMac/Documents/Titanium_Studio_Workspace/AutonomApp/Resources/ui/tablet/RegTimeWin.js
