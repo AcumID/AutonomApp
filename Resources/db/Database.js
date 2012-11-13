@@ -58,6 +58,23 @@ function Database() {
 		return result;
 	};
 	
+	api.gDataElementByName = function(name){
+		var result = null;
+		var resultSet = db.execute('SELECT * FROM materials WHERE name = ?', name);
+		if(resultSet.isValidRow()){
+			result = {
+				id: resultSet.fieldByName('id'),
+				stocknumber: resultSet.fieldByName('stocknumber'),
+				name: resultSet.fieldByName('name'),
+				unit: resultSet.fieldByName('unit'),
+				assignments: resultSet.fieldByName('assignments'),
+				image: resultSet.fieldByName('image'),
+				price: resultSet.fieldByName('price')
+			};
+		}
+		return result;
+	};
+	
 	api.updateDataElement = function(dataElement){
 		db.execute('UPDATE materials SET stocknumber = '+dataElement.stocknumber+', name = "'+dataElement.name+'", unit = "'+dataElement.unit+'", assignments = "'+dataElement.assignments+'", image = "'+dataElement.image+'", price = '+dataElement.price+' WHERE id = '+dataElement.id+'');
 		return db.rowsAffected; //return the number of rows affected by the last query
@@ -65,6 +82,11 @@ function Database() {
 	
 	api.deleteDataElementById = function(id){
 		db.execute('DELETE FROM materials WHERE id = ?',id);
+		return db.rowsAffected; //return the number of rows affected by the last query
+	};
+	
+		api.deleteDataElementByName = function(name){
+		db.execute('DELETE FROM materials WHERE name = ?',name);
 		return db.rowsAffected; //return the number of rows affected by the last query
 	};
 	
