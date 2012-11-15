@@ -15,8 +15,12 @@ function RegMatWin(title) {
 		layout: "horizontal"
 	});
 
+
 var scrollView = Ti.UI.createScrollView({
 	layout: "vertical",
+	backgroundColor:"#858585",
+	borderColor:"#9D9D9D",
+	borderRadius:1,
 	width:"50%"
 	});
 self.add(scrollView);
@@ -24,12 +28,14 @@ self.add(scrollView);
 
 var scrollView2 = Ti.UI.createScrollView({
 	layout: "vertical",
+	backgroundColor:"#EEEEEE",
 	width:"50%"	});
 self.add(scrollView2);
 
 var tbl_data = [];
 
 var tbl_data_selected = [];
+
 
 
 //adds content to tbl data from DB
@@ -39,47 +45,27 @@ for (var i = 1; i <= db.gAll().length; i++) {
 		title: db.gDataElementById(i).name
 	});
 	
-	var button = Ti.UI.createButton({
-			right: 10,
-			height: 30,
-			width: 80,
-			title: 'Tilføj'
-			});
-			
-	row.add(button);
+	
+	
 	element.push(row);
 	};
 };
 
 //adds content to tbl data selected from RDB
 function populatorRDB(element){
+	
 	for (var i = 1; i <= rdb.gAll().length; i++) {
-			console.log(rdb.gDataElementById(i).name+" "+rdb.gDataElementById(i).number);
 		var row = Ti.UI.createTableViewRow({
 			title: rdb.gDataElementById(i).number+"   "+rdb.gDataElementById(i).name
 		});
 		
-		var button = Ti.UI.createButton({
-			right: 10,
-			height: 30,
-			width: 80,
-			title: 'Fjern'
-		});
-			
-		var counterLabel = Ti.UI.createLabel({
-			height: 30,
-			width: 40,
-			title: rdb.gDataElementById(i).number
-		});
-	
-		row.add(counterLabel);
-		row.add(button);
-		element.push(row);
+		element[i-1]=row;
 	};
 };
 
 populatorDB(tbl_data);
 populatorRDB(tbl_data_selected);
+
 
 //Creating Searchbar
 if(platform === "mobileweb"){
@@ -91,14 +77,17 @@ if(platform === "mobileweb"){
 	});
 } else {
 	var searchBar = Titanium.UI.createSearchBar({
+		//TODO only hinttext seems to be working
+		backgroundColor: "black",
 		barColor: '#385292',
+		hintText: "Hvad leder du efter?",
 		showCancel: false
 	});
 }
 scrollView.add(searchBar);
 
 var tableView = Titanium.UI.createTableView({
-	headerTitle:"Materialeforslag",
+	headerTitle:"Forslag",
 	search: searchBar,
 });
 if(platform === "ipad"){
@@ -108,7 +97,7 @@ tableView.setData(tbl_data);
 scrollView.add(tableView);
 
 var tableViewSelected = Titanium.UI.createTableView({
-	headerTitle:"Materialeliste",
+	headerTitle:"Valgte materialer",
 });
 if(platform === "ipad"){
 	tableViewSelected.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
@@ -116,22 +105,108 @@ if(platform === "ipad"){
 tableViewSelected.setData(tbl_data_selected);
 scrollView2.add(tableViewSelected);
 
-tableView.addEventListener('click', function(e) {
-	console.log(e.source.title);
-	rdb.addDataElement(db.gDataElementByName(e.source.title),1);
-	console.log(rdb.gAll());
-	tableViewSelected.appendRow({title:rdb.gDataElementByName(e.source.title).number+"   "+e.source.title},{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});	
+var checkRedundancy = function(name){
+	var isReduntant = false;
+
+	for(var i=0; i<tbl_data_selected.length; i++){
+		if(tbl_data_selected[i].title.substr(tbl_data_selected[i].title.indexOf(" ")+3,tbl_data_selected[i].title.length) === name){
+			isReduntant = true;
+		};	
+	}
+	return isReduntant;	
+};
+
+var currentEditElement;
+
+var popOver = Ti.UI.iPad.createPopover({
+	height:400,
+	width:300,
+	title:"Redigér antal",
+	arrowDirection:Ti.UI.iPad.POPOVER_ARROW_DIRECTION_LEFT
 });
 
+//HANDLER FOR MATERIAL-CLICK
+tableView.addEventListener('click', function(e) {
+	
+		currentEditElement=db.gDataElementByName(e.source.title);
+		
+		var pickerView = Ti.UI.createView({
+			title:"",height:20,width:1,top:20,right:0
+		});
+		
+		pickerView.addEventListener('postlayout',displayPopOver);
+		
+		e.row.add(pickerView);	
+		
+		function displayPopOver(){
+			pickerView.removeEventListener('postlayout',displayPopOver);
+			
+			popOver.addEventListener('hide',function(evt){
+				e.row.remove(pickerView)
+			});
+			
+			popOver.add(popOverView);
+			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100}});
+		};
+					
+});
+
+
+var popOverView = Ti.UI.createView({
+	backgroundColor:"white"
+});
+
+var popOverLabel = Ti.UI.createLabel({
+	text: "Hvor mange?",
+	center: {x: 150, y: 150},
+	font: {
+		fontSize: 24
+	}
+});
+
+var numberInputField = Ti.UI.createTextField({
+	value: 1,
+	width: 200,
+	height: 50,
+	center: {x: 150, y: 200},
+	borderRadius: 8,
+	borderColor: "black",
+	font: {
+		fontSize: 22
+	},
+	enabled: true
+});
+
+popOverView.add(popOverLabel);
+popOverView.add(numberInputField);
+
+//HANDLER FOR RETURN ON NUMBER ENTERED
+numberInputField.addEventListener('return',function(e){
+	if(checkRedundancy(currentEditElement.name)){
+		//TODO Currently interprets inputTextField.value as String = mathmatics are not right.	
+		rdb.updateDataElementNumberByName(db.gDataElementByName(currentEditElement.name), (rdb.gDataElementByName(currentEditElement.name).number+e.source.value));
+		populatorRDB(tbl_data_selected);
+		
+	}else{
+		rdb.addDataElement(db.gDataElementByName(currentEditElement.name),e.source.value);
+		tbl_data_selected.push(
+					Ti.UI.createTableViewRow({
+						title:rdb.gDataElementByName(currentEditElement.name).number+"   "+currentEditElement.name
+					}))	
+	}
+	e.source.value=1;
+	tableViewSelected.data = tbl_data_selected;
+	popOver.hide();
+});
+
+//HANDLER FOR REGMATERIAL-CLICK
 tableViewSelected.addEventListener('click',function(e){
 	var nameOfMaterial = e.source.title.substr(e.source.title.indexOf(" ")+3,e.source.title.length);
-	console.log(nameOfMaterial);
 	tableViewSelected.deleteRow(e.index,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});
 	rdb.deleteDataElementByName(nameOfMaterial);
 	var newIndex = 1;
 	for(dataElement in rdb.gAll()){
 		//TODO HER ER DET AT DER SKAL SKE NOGET - RAMMUS ER IGANG LIGE HER
-		console.log("UPDATING "+dataElement.name+" NI: "+newIndex);
 		rdb.updateDataElementId(dataElement,newIndex);
 		newIndex++;
 	};
