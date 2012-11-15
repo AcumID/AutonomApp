@@ -30,13 +30,13 @@ if (Ti.version < 1.8 ) {
 	//	var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
 	//var isTablet = true;
 	
+	//init Ti.App.Properties
+	
+	//init Database
 	var Database = require('db/Database');
 	var RemoteDatabase = require('db/RemoteDatabase');
-	
 	var db = new Database();
-	
 	var rdb = new RemoteDatabase(db);
-	
 	rdb.loadRemoteData();
 	
 	var WelcomeWin;
