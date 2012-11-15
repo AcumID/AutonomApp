@@ -8,29 +8,33 @@ function RegTimeWin(title) {
 		layout:'vertical'
 	});
 	var persons = Ti.App.Properties.getList('persons',persons);
-	
-	/*for (var i=0; i < workersOnAssignment.length; i++) {
-	  	workersOnAssignement[i].label = Titanium.UI.createLabel({
+	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
+	console.log(workersOnAssignment);
+	var label = function(){ Ti.UI.createLabel({
 	  			top: 40,
-	  			font: {fontSize: 24},
-	  			text: worksOnAssignment[i].firstName+" har arbejdet i dag"
-	  		})
-	  	}
-	  	workersOnAssignment[i].slider = Titanium.UI.createSlider({
+	  			font: {fontSize: 24}
+	  	});}
+  	var slider = function() { Titanium.UI.createSlider({
 	  			top: 70,
 	  			min: 0,
 	  			max: 24,
-	  			width: "80%"
+	  			width: "80%",
 	  			value: 6
-	  		})
-		}
-		workersOnAssignment.slider.addEventListener("change", function(e){
+	  	});}
+	
+	for (var i=0; i<workersOnAssignment.length; i++) {
+	  	workersOnAssignment[i].label;
+	  	workersOnAssignment[i].slider;
+		workersOnAssignment[i].slider.addEventListener("change", function(e){
 			workersOnAssignment[i].hours = Math.ceil(workersOnAssignment[i].slider.value)
 			workersOnAssignment[i].label.text = workersOnAssignment[i].firstName+" har arbejdet "+workersOnAssignment[i].hours+" timer."
+			Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
 		})
 		self.add(workersOnAssignment[i].label);
 		self.add(workersOnAssignment[i].slider);
-	}*/
+	};
+		
+		
 	var car = Ti.UI.createView();
   		car.label = Titanium.UI.createLabel({
    			top: 40,
@@ -46,6 +50,7 @@ function RegTimeWin(title) {
 		car.slider.addEventListener("change", function(e){
 			car.hours = Math.ceil(car.slider.value);
 			car.label.text = "Bilen har været i brug i  "+car.hours+" timer.";
+			Ti.App.Properties.setInt("carHours",car.hours);
 		});
 	self.add(car.label);
 	self.add(car.slider);

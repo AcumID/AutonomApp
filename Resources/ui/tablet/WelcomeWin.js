@@ -1,55 +1,219 @@
+var platform = Ti.Platform.osname;
 function WelcomeWin(title) {
-	var self = Ti.UI.createWindow({
-		title:title,
-		backgroundColor:'white'
+	
+	
+	//clear 
+	//Ti.App.Properties.setList('workersOnAssignment', []);
+	
+	//load relevant data for this view from memory
+	var persons = Ti.App.Properties.getList('persons', []); 
+	var workersOnAssignment = Ti.App.Properties.getList('workersOnAssignment', []);
+	var assignment = Ti.App.Properties.getString('assignment', "");
+	var location = Ti.App.Properties.getString('location', "");
+	
+	
+	//for making buttons in right order
+	var zIndexCounter = 1;
+
+	Ti.App.addEventListener('updatePersons', function(){
+		persons = Ti.App.Properties.getList('persons', []);
+	});	
+	
+	Ti.App.addEventListener('updateWorkersOnAssignment', function(){
+		workersOnAssignment = Ti.App.Properties.getList('workersOnAssignment', [])
+		/*
+			
+		}*/
 	});
 	
-	var svdName = "Pedersen",
-		lrlName = "Findus",
-		prtName = "Solceller på Birkevej 12";
 	
-	var textField = Ti.UI.createView ({
-		width:"90%"
+	/*
+	 Her Bygges f¯rste View, der kan Êndre hvilke personer der er pÂ arbejde
+	 * */
+	
+	var self = Ti.UI.createWindow({title:title, backgroundColor:'white', layout: 'vertical'});
+	
+	
+	
+	
+	
+	var welcomeView = Ti.UI.createView ({width:"90%", height:"10%", layout: 'horizontal'});
+	self.add(welcomeView);
+		
+	var textField = Ti.UI.createLabel({
+		text: "Hej ",
+		font: {fontFamily:"Segoe UI", fontSize: 56}
+	})	
+	welcomeView.add(textField);
+	
+	//adds the persons currently on the assignment with 'og' inbetween
+	if(workersOnAssignment.length === 1){
+			createPersonButton(workersOnAssignment[0].firstName);
+	} else {
+		for (var i=0;i<workersOnAssignment.length;i++){
+			createPersonButton(workersOnAssignment[i].firstName);
+			if (i+1<workersOnAssignment.length){
+				createOgField();
+			}			
+		}
+	}
+	//Helper functions for the previous if statement
+	function createOgField(){
+		var textField = Ti.UI.createLabel({
+			text: " og ",
+			font: {fontFamily:"Segoe UI", fontSize: 56}
+			})
+		zIndexCounter++;	
+		welcomeView.add(textField);
+	}
+	function createPersonButton(name){
+		var btn = Ti.UI.createButton({
+			title: name,
+			zIndex:zIndexCounter
+		});
+		zIndexCounter++;	
+		btn.addEventListener('click', function(e){
+			createPersonPicker(name, btn.zIndex);
+		});
+		welcomeView.add(btn);
+	}
+	
+	function createPersonPicker(currentName, zIndex){
+		Ti.App.fireEvent('updatePersons');
+		var buttons = [];
+		
+		
+		for (var i=0;i<persons.length;i++){
+			buttons.push(persons[i].firstName);
+		}
+		buttons.push('Slet');
+		buttons.push('Annuller');
+		var nameList = Ti.UI.createAlertDialog({
+			message: 'VÊlg person',
+			buttonNames: buttons
+		});
+		
+		var clickHandler = function(e){			
+			if(e.index === buttons.length - 2){
+				deleteButton(zIndex);
+			} else if (e.index === buttons.length - 1) {
+				//nothing happens
+			} else {
+				
+				workersOnAssignment[zIndexCounter]=persons[e.index];
+				
+				updateButton((workersOnAssignment[zIndexCounter].firstName), zIndex);							
+				for (var i = workersOnAssignment.length;i>=0;i--){
+					if (workersOnAssignment[i] === undefined){
+						workersOnAssignment.splice(i,1);
+					} else {
+					}
+				}
+				Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
+				Ti.App.fireEvent('updateWorkersOnAssignment');
+
+								
+			}	
+		}			
+		nameList.addEventListener('click', clickHandler)
+		nameList.show();	
+	}	
+	
+	function updateButton(newName, zIndex){
+		
+		welcomeView.children[zIndex].title = newName;
+	}
+	function deleteButton(zIndex) {
+		welcomeView.remove(welcomeView.children[zIndex]);
+		welcomeView.remove(welcomeView.children[zIndex-1]);	
+		//zIndexCounter-=2;
+	}
+
+
+	var addBtn = Ti.UI.createButton({
+		title:'+'
 	});
-	self.add(textField);
-	
-	var nameLabel = Ti.UI.createLabel({
-		text: "Hej "+svdName+" og "+lrlName,
-		font: {fontFamily:"Segoe UI", fontSize: 56},
-		top:"1%"
+	addBtn.addEventListener('click', function() {
+		createOgField();
+		createPersonButton('Ny person');
 	});
-	textField.add(nameLabel);
+	self.add(addBtn);
 	
-	var projectLabel = Ti.UI.createLabel({
-		text: "I dag arbejder I på "+prtName+". Hvis I har nogle spørgsmål i forbindelse med projektet, dagens gang eller lignende, kig under fanen Projektbeskrivelse i bunden af skærmen.",
-		font: {fontFamily:"Segoe UI Light", fontSize: 40},
-		top:"15%",
-		width:"100%"
+	/*var removeBtn = Ti.UI.createButton({
+		title:'-'
 	});
-	textField.add(projectLabel);
-	
-	var confirmerLabel = Ti.UI.createLabel({
-		text: "Stemmer projektet, adressen eller navnet ikke?",
-		font: {fontFamily:"Segoe UI Light", fontSize: 30},
-		top:"60%",
-		width:"100%"
+	removeBtn.addEventListener('click', function() {
+		welcomeView.remove(welcomeView.children[welcomeView.children.length - 1]);
+		welcomeView.remove(welcomeView.children[welcomeView.children.length - 2]);
+		welcomeView.children.splice(welcomeView.children.length-2,2);
+		zIndexCounter-=2;
 	});
-	textField.add(confirmerLabel);
+	self.add(removeBtn);*/
 	
-	var confirmButton = Ti.UI.createButton({
-		title: "Det stemmer >",
-		top:"70%",
-		left:"75%"
+	//brug welcomeView.element({zIndex:1}); til at bestemme position pÂ de forskellige ting.
+	
+	
+	//build the location view
+	
+	var locationView = Ti.UI.createView ({
+		width:"90%", height:"10%", layout: 'horizontal'});
+	self.add(locationView);
+	
+	var textField2 = Ti.UI.createLabel({
+		text: "I dag arbejder i pÂ  ",
+		font: {fontFamily:"Segoe UI", fontSize: 30}
+	})	
+	locationView.add(textField2);
+	
+	var tf1 = Titanium.UI.createTextField({
+		value:location,
+		width:250,
+		height:40,
+		top:10,
+		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+		autocorrect:false
 	});
-	textField.add(confirmButton);
-	
-	var declineButton = Ti.UI.createButton({
-		title: "Noget stemmer ikke",
-		top:"70%",
-		left:"25%"
+	tf1.addEventListener('return', function() {
+		// hide the keyboard
+		tf1.blur();
 	});
-	textField.add(declineButton);
+	tf1.addEventListener('change', function(e) {
+		// save the text field's value 
+		Titanium.App.Properties.setString("location",e.value);
+	});
+	locationView.add(tf1);
 	
+	
+	//add the assignment view
+	
+	var assignmentView = Ti.UI.createView ({
+		width:"90%", height:"10%", layout: 'horizontal'});
+	self.add(assignmentView);
+	
+	var textField3 = Ti.UI.createLabel({
+		text: "med at  ",
+		font: {fontFamily:"Segoe UI", fontSize: 30}
+	})	
+	assignmentView.add(textField3);
+	
+	var tf2 = Titanium.UI.createTextField({
+		value:assignment,
+		width:250,
+		height:40,
+		top:10,
+		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+		autocorrect:false
+	});
+	tf2.addEventListener('return', function() {
+		// hide the keyboard
+		tf2.blur();
+	});
+	tf2.addEventListener('change', function(e) {
+		// save the text field's value 
+		Titanium.App.Properties.setString("assignment",e.value);
+	});
+	assignmentView.add(tf2);
+
 	return self;
 };
 

@@ -75,7 +75,6 @@ if(platform === "mobileweb"){
 	var searchBar = Titanium.UI.createSearchBar({
 		barColor: '#385292',
 		showCancel: false,
-		value: "Værdien af en søgebar"
 	});
 }
 scrollView.add(searchBar);
