@@ -82,6 +82,10 @@ function RegistrationDatabase() {
 		db.execute('UPDATE regmaterials SET id = '+id+' WHERE name = "'+dataElement.name+'"');
 		return db.rowsAffected; //return the number of rows affected by the last query
 	};
+	api.updateDataElementNumberByName = function(dataElement,number){
+		db.execute("UPDATE regmaterials SET number = "+number+" WHERE name = '"+dataElement.name+"'");
+		return db.rowsAffected;
+	};
 	
 	api.updateDataElement = function(dataElement){
 		db.execute('UPDATE regmaterials SET stocknumber = '+dataElement.stocknumber+', name = "'+dataElement.name+'", unit = "'+dataElement.unit+'", assignments = "'+dataElement.assignments+'", image = "'+dataElement.image+'", price = '+dataElement.price+', number = '+dataElement.number+' WHERE id = '+dataElement.id);
