@@ -147,6 +147,7 @@ tableView.addEventListener('click', function(e) {
 			
 			popOver.add(popOverView);
 			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100}});
+			numberInputField.focus();
 		};
 					
 });
@@ -174,7 +175,9 @@ var numberInputField = Ti.UI.createTextField({
 	font: {
 		fontSize: 22
 	},
-	enabled: true
+	enabled: true,
+	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+	clearOnEdit: true
 });
 
 popOverView.add(popOverLabel);
