@@ -1,107 +1,60 @@
 /**
  * @author Jonas
  */
-
 function RegTimeWin(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
 		backgroundColor:'white',
 		layout:'vertical'
 	});
-	var svende = new Array("Pedersen","Hanen");
-	var lrlinge = new Array("Findus","Hønen");
-	var sliders = new Array;
-	var labels = new Array;
+	var persons = Ti.App.Properties.getList('persons',persons);
+	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
+	console.log(workersOnAssignment);
+	var label = function(){ Ti.UI.createLabel({
+	  			top: 40,
+	  			font: {fontSize: 24}
+	  	});}
+  	var slider = function() { Titanium.UI.createSlider({
+	  			top: 70,
+	  			min: 0,
+	  			max: 24,
+	  			width: "80%",
+	  			value: 6
+	  	});}
 	
-	
-	var svendeArray = [];
-	var Svend = function(name){
-		this.name = name;
-		this.hours = 10;
-		this.createLabel = function(){
-			var label = Titanium.UI.createLabel({
-			top: 40,
-			font:{
-				fontSize: 24
-			},
-			text: "Svendetimer for "+this.name+": "
-			})
-			return label
-		}
-		this.createSlider = function(){
-			var slider = Titanium.UI.createSlider({
-    		top: 70,
-   			min: 0,
-  	  		max: 24,
-    		width: '80%',
-    		value: this.hours
-			});
-			return slider;
-		}
-		this.slider = this.createSlider();
-		this.label = this.createLabel();
-	}
-	var bent = new Svend("Bent");
-	
-	self.add(bent.label);
-	self.add(bent.slider);
-	
-	
-	bent.slider.addEventListener("change", function(e){
-			bent.hours = Math.ceil(bent.slider.value);
-			bent.label.text = "Svendetimer for "+bent.name+": "+bent.hours;
-	});
-
-	
-/*	
-	
-	for (var i = svende.length - 1; i >= 0; i--){
-		var slider = Titanium.UI.createSlider({
-    	top: 70+(i+1)*70,
-   		min: 0,
-  	  	max: 24,
-    	width: '80%',
-    	value: 6
-    });
-    	var svendTimer = Ti.UI.createLabel({
-		text:"Svendetimer " + slider.value,
-		top: 30+(i+1)*70
-	});
-    	sliders.push(slider);
-    	labels.push(svendTimer);
-	};
-	
-	for (var i = sliders.length - 1; i >= 0; i--){
-		self.add(sliders[i]);
-		self.add(labels[i]);
-		sliders[i].addEventListener("change", function(e){
-			labels[i].text = "Svendetimer " + Math.ceil(sliders[i].value)
+	for (var i=0; i<workersOnAssignment.length; i++) {
+	  	workersOnAssignment[i].label;
+	  	workersOnAssignment[i].slider;
+		workersOnAssignment[i].slider.addEventListener("change", function(e){
+			workersOnAssignment[i].hours = Math.ceil(workersOnAssignment[i].slider.value)
+			workersOnAssignment[i].label.text = workersOnAssignment[i].firstName+" har arbejdet "+workersOnAssignment[i].hours+" timer."
+			Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
 		})
+		self.add(workersOnAssignment[i].label);
+		self.add(workersOnAssignment[i].slider);
 	};
-
+		
+		
+	var car = Ti.UI.createView();
+  		car.label = Titanium.UI.createLabel({
+   			top: 40,
+  			font: {fontSize: 24},
+  			});
+	  	car.slider = Titanium.UI.createSlider({
+	  			top: 60,
+	  			min: 0,
+	  			max: 24,
+	  			width: "80%",
+	  			value: 6,
+	 	 	});
+		car.slider.addEventListener("change", function(e){
+			car.hours = Math.ceil(car.slider.value);
+			car.label.text = "Bilen har været i brug i  "+car.hours+" timer.";
+			Ti.App.Properties.setInt("carHours",car.hours);
+		});
+	self.add(car.label);
+	self.add(car.slider);
 	
-	var slider2 = Titanium.UI.createSlider({
-    	top: "65%",
-   		min: 0,
-  	  	max: 12,
-    	width: '80%',
-    	value: 6
-    });
-    self.add(slider2);
-    
-    slider2.addEventListener("change", function(e){
-    	lrlTimer.text = "Lærlingetimer " + Math.ceil(slider2.value)
-    });
-
-
-	var lrlTimer = Ti.UI.createLabel({
-		text:"Lærlingetimer " + slider2.value,
-		top:"55%"
-	});
-	self.add(lrlTimer);
-	
-	
-*/	
 	return self;
 };
 

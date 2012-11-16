@@ -80,8 +80,8 @@ if(platform === "mobileweb"){
 		//TODO only hinttext seems to be working
 		backgroundColor: "black",
 		barColor: '#385292',
-		hintText: "Hvad leder du efter?",
-		showCancel: false
+		showCancel: false,
+		hintText: "Hvad leder du efter?"
 	});
 }
 scrollView.add(searchBar);
