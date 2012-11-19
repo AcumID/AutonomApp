@@ -10,7 +10,7 @@ function ToolWin(title) {
 	});
 	
 	var label = Ti.UI.createLabel({
-		text: "Tilf¯j person"
+		text: "Tilføj person"
 	});
 	self.add(label);
 	
@@ -32,6 +32,10 @@ function ToolWin(title) {
 	});
 	self.add(tf2);
 	
+	var isJourneymanPicker = Ti.UI.createSwitch({
+		
+	});
+	
 	var Person = function(firstName, lastName, isJourneyman){
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -41,11 +45,11 @@ function ToolWin(title) {
 	
 
 	var btn = Ti.UI.createButton({
-		title: 'Tilf¯j',
+		title: 'Tilføj',
 	});
 	
 	btn.addEventListener('click', function(e){
-		var person = new Person(tf1.value, tf2.value, true);
+		var person = new Person(tf1.value, tf2.value, isJourneymanPicker.value);
 		var persons = Ti.App.Properties.getList('persons', []);
 		persons.push(person);
 		Ti.App.Properties.setList('persons', persons);
@@ -56,7 +60,7 @@ function ToolWin(title) {
 	self.add(btn);
 
 	var btn2 = Ti.UI.createButton({
-		title: 'T¯m svende database',
+		title: 'Tøm svende database',
 	});
 	btn2.addEventListener('click', function(){
 		var persons = [];

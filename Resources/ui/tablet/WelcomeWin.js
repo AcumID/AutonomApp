@@ -4,8 +4,10 @@ function WelcomeWin(title) {
 	
 	//clear 
 	//Ti.App.Properties.setList('workersOnAssignment', []);
+	Ti.App.Properties.setInt("journeymanHours", []);
 	
 	//load relevant data for this view from memory
+	
 	var persons = Ti.App.Properties.getList('persons', []); 
 	var workersOnAssignment = Ti.App.Properties.getList('workersOnAssignment', []);
 	var assignment = Ti.App.Properties.getString('assignment', "");
@@ -24,14 +26,14 @@ function WelcomeWin(title) {
 			
 		}*/
 	});
-	
+
 	/*
 	 Her Bygges f¯rste View, der kan Êndre hvilke personer der er pÂ arbejde
 	 * */
 	
 	var self = Ti.UI.createWindow({title:title, backgroundColor:'white', layout: 'vertical'});
 	
-	var welcomeView = Ti.UI.createView ({width:"90%", height:"10%", layout: 'horizontal'});
+	var welcomeView = Ti.UI.createView ({width:"90%", height:Ti.UI.SIZE, layout: 'horizontal'});
 	self.add(welcomeView);
 		
 	var textField = Ti.UI.createLabel({
@@ -82,7 +84,7 @@ function WelcomeWin(title) {
 		buttons.push('Slet');
 		buttons.push('Annuller');
 		var nameList = Ti.UI.createAlertDialog({
-			message: 'VÊlg person',
+			message: 'Vælg person',
 			buttonNames: buttons
 		});
 		
@@ -94,12 +96,16 @@ function WelcomeWin(title) {
 						Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
 					}
 				}
-				deleteButton(zIndex);				
+				Ti.App.fireEvent('updateWorkersOnAssignment');
+				deleteButton(zIndex);
+				for (var h=0;h<welcomeView.children.length;h++){
+					welcomeView.children[h].zIndex -=2;
+				}				
 			} else if (e.index === buttons.length - 1) {
 				//nothing happens
 			} else {
-				workersOnAssignment[zIndexCounter]=persons[e.index];
-				updateButton((workersOnAssignment[zIndexCounter].firstName), zIndex);							
+				workersOnAssignment[zIndex]=persons[e.index];
+				updateButton((workersOnAssignment[zIndex].firstName), zIndex);							
 				for (var i = workersOnAssignment.length;i>=0;i--){
 					if (workersOnAssignment[i] === undefined){
 						workersOnAssignment.splice(i,1);
@@ -120,8 +126,9 @@ function WelcomeWin(title) {
 	function deleteButton(zIndex) {
 		welcomeView.remove(welcomeView.children[zIndex]);
 		welcomeView.remove(welcomeView.children[zIndex-1]);	
-		Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
-		Ti.App.fireEvent('updateWorkersOnAssignment');
+		//Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
+		//Ti.App.fireEvent('updateWorkersOnAssignment');
+		zIndexCounter-=2;
 	}
 	var addBtn = Ti.UI.createButton({
 		title:'+'
@@ -131,17 +138,6 @@ function WelcomeWin(title) {
 		createPersonButton('Ny person');
 	});
 	self.add(addBtn);
-	
-	/*var removeBtn = Ti.UI.createButton({
-		title:'-'
-	});
-	removeBtn.addEventListener('click', function() {
-		welcomeView.remove(welcomeView.children[welcomeView.children.length - 1]);
-		welcomeView.remove(welcomeView.children[welcomeView.children.length - 2]);
-		welcomeView.children.splice(welcomeView.children.length-2,2);
-		zIndexCounter-=2;
-	});
-	self.add(removeBtn);*/
 
 	//build the location view
 	
@@ -150,7 +146,7 @@ function WelcomeWin(title) {
 	self.add(locationView);
 	
 	var textField2 = Ti.UI.createLabel({
-		text: "I dag arbejder i pÂ ",
+		text: "I dag arbejder i på ",
 		font: {fontFamily:"Segoe UI", fontSize: 30}
 	})	
 	locationView.add(textField2);

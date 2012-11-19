@@ -118,6 +118,12 @@ var checkRedundancy = function(name){
 
 var currentEditElement;
 
+
+
+
+
+
+
 var popOver = Ti.UI.iPad.createPopover({
 	height:400,
 	width:300,
