@@ -7,10 +7,7 @@ function RegTimeWin(title) {
 		backgroundColor:'white',
 		layout:'vertical'
 	});
-	var persons = Ti.App.Properties.getList('persons',persons);
 	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
-	var inForLoop = true;
-	var thisWorker = "";
 
 	for (var i=0; i<workersOnAssignment.length; i++) {
 		workersOnAssignment[i].label = Ti.UI.createLabel({
@@ -33,7 +30,7 @@ function RegTimeWin(title) {
 
 			workersOnAssignment[j].workHours = Math.ceil(e.source.value);
 			workersOnAssignment[j].label.text = workersOnAssignment[j].firstName+" har arbejdet "+workersOnAssignment[j].workHours+" timer.";
-			Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
+		//	Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
 		});
 
 
