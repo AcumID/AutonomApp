@@ -4,7 +4,7 @@ function WelcomeWin(title) {
 	
 	//clear 
 	//Ti.App.Properties.setList('workersOnAssignment', []);
-	Ti.App.Properties.setInt("journeymanHours", []);
+	//Ti.App.Properties.setInt("journeymanHours", []);
 	
 	//load relevant data for this view from memory
 	

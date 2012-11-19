@@ -17,8 +17,8 @@ function RegTimeWin(title) {
 	var assignment = Ti.App.Properties.getString('assignment');
 	var location = Ti.App.Properties.getString('location');
 		// Variables containing the hours worked
-	var journeymanHours = Ti.App.Properties.getInt("journeymanHours",0);
-	var apprenticeHours = Ti.App.Properties.getInt("apprenticeHours",0);
+	var journeymanHours = 0;
+	var apprenticeHours = 0;
 	var carHours = Ti.App.Properties.getInt("carHours",0);
 	
 	Ti.App.addEventListener('updateWorkersOnAssignment', function(){
