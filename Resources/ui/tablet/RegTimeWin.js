@@ -7,8 +7,8 @@ function RegTimeWin(title) {
 		backgroundColor:'white',
 		layout:'vertical'
 	});
-	var persons = Ti.App.Properties.getList('persons',persons);
-	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
+	var persons = Ti.App.Properties.getList('persons');
+	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment");
 	console.log(workersOnAssignment);
 	var label = function(){ Ti.UI.createLabel({
 	  			top: 40,
