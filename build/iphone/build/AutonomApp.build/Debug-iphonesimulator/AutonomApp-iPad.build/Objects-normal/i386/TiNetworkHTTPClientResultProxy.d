@@ -1,30 +1,30 @@
 dependencies: \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiNetworkHTTPClientResultProxy.m \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiNetworkHTTPClientResultProxy.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiProxy.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiBase.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiThreading.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiPublicAPI.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiEvaluator.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollContext.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/headers/TiCore/TiCore.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiNetworkHTTPClientResultProxy.m \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiNetworkHTTPClientResultProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiBase.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiThreading.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiPublicAPI.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiEvaluator.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollContext.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/headers/TiCore/TiCore.h \
   headers/TiCore/Ti.h headers/TiCore/TiBase.h \
   headers/TiCore/TiContextRef.h headers/TiCore/TiObjectRef.h \
   headers/TiCore/TiValueRef.h headers/TiCore/WebKitAvailability.h \
   headers/TiCore/TiStringRef.h headers/TiCore/TiStringRefCF.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/headers/TiCore/TiContextRefPrivate.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollCallback.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollObject.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiNetworkHTTPClientProxy.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiBlob.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/ASIFormDataRequest.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/ASIHTTPRequest.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/ASIHTTPRequestConfig.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/ASIHTTPRequestDelegate.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/ASIProgressDelegate.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/ASI/ASICacheDelegate.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMDocumentProxy.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/GDataXMLNode.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/headers/TiCore/TiContextRefPrivate.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollCallback.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollObject.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiNetworkHTTPClientProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiBlob.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/ASI/ASIFormDataRequest.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/ASI/ASIHTTPRequest.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/ASI/ASIHTTPRequestConfig.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/ASI/ASIHTTPRequestDelegate.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/ASI/ASIProgressDelegate.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/ASI/ASICacheDelegate.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiDOMDocumentProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/GDataXMLNode.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/tree.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xmlversion.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xmlexports.h \
@@ -48,13 +48,13 @@ dependencies: \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/SAX2.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xpath.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator6.0.sdk/usr/include/libxml2/libxml/xpathInternals.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDOMNodeProxy.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollMethod.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollMethodDelegate.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/KrollPropertyDelegate.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiUtils.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiColor.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiDimension.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/WebFont.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiFile.h \
-  /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/Classes/TiBuffer.h
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiDOMNodeProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollMethod.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollMethodDelegate.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollPropertyDelegate.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUtils.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiColor.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiDimension.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/WebFont.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiFile.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiBuffer.h

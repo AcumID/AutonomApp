@@ -59,12 +59,6 @@
 	[[self ensureItem] setBadgeValue:badgeValue];
 }
 
--(void)setTitle:(id)value
-{
-	NSString* badgeValue = [TiUtils stringValue:value];
-	[[self ensureItem] setTitle:badgeValue];
-}
-
 -(void)setImage:(id)value
 {
 	UIImage *image = [TiUtils image:value proxy:self];

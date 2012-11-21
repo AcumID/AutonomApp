@@ -1351,7 +1351,7 @@
 {
 	WARN_IF_BACKGROUND_THREAD_OBJ
 
-	if ( (visibleProxy == keyboardFocusedProxy) && (leavingAccessoryView == nil) )
+	if (visibleProxy == keyboardFocusedProxy)
 	{
 		DeveloperLog(@"[WARN] Focused for %@<%X>, despite it already being the focus.",keyboardFocusedProxy,keyboardFocusedProxy);
 		return;

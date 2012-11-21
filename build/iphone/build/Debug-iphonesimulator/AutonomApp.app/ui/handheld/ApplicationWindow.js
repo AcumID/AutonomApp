@@ -1,1 +1,1 @@
-/Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/Resources/ui/handheld/ApplicationWindow.js
+/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/Resources/ui/handheld/ApplicationWindow.js

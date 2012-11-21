@@ -115,13 +115,14 @@ static const NSTimeInterval kLauncherViewFastTransitionDuration = 0.2;
 
 -(LauncherButton*)addButtonWithItem:(LauncherItem*)item
 {
-    LauncherButton *button = [[LauncherButton alloc] initWithFrame:CGRectZero];
-    [button addTarget:self action:@selector(buttonTouchedUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [button addTarget:self action:@selector(buttonTouchedUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
-    [button addTarget:self action:@selector(buttonTouchedDown:withEvent:) forControlEvents:UIControlEventTouchDown];
-    [scrollView addSubview:button];
-    button.item = item;
-    return [button autorelease];
+	LauncherButton *button = [[LauncherButton alloc] initWithFrame:CGRectZero];
+	[button setTitle:item.title forState:UIControlStateNormal];
+	[button addTarget:self action:@selector(buttonTouchedUpInside:) forControlEvents:UIControlEventTouchUpInside];
+	[button addTarget:self action:@selector(buttonTouchedUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
+	[button addTarget:self action:@selector(buttonTouchedDown:withEvent:) forControlEvents:UIControlEventTouchDown];
+	[scrollView addSubview:button];
+	button.item = item;
+	return [button autorelease];
 }
 
 -(NSInteger)rowHeight
@@ -358,8 +359,8 @@ static const NSTimeInterval kLauncherViewFastTransitionDuration = 0.2;
 	
 	if (dragButton) 
 	{
-		[dragButton setSelected:NO];
-		[dragButton setHighlighted:NO];
+		dragButton.selected = NO;
+		dragButton.highlighted = NO;
 		dragButton.dragging = NO;
 		[self layoutButtons];
 	}
@@ -556,7 +557,7 @@ static const NSTimeInterval kLauncherViewFastTransitionDuration = 0.2;
 	}
 }
 
-- (void)closeButtonTouchedUpInside:(LauncherButton*)closeButton
+- (void)closeButtonTouchedUpInside:(LauncherButton*)closeButton 
 {
 	for (NSArray* buttonPage in buttons) 
 	{
@@ -684,22 +685,23 @@ static const NSTimeInterval kLauncherViewFastTransitionDuration = 0.2;
 }
 
 
-- (void)editHoldTimer:(NSTimer*)timer
+- (void)editHoldTimer:(NSTimer*)timer 
 {
     editHoldTimer = nil;
 
 	NSArray *data = timer.userInfo;
 	LauncherButton *button = [data objectAtIndex:0];
 	UIEvent *event = [data objectAtIndex:1];
-    if ( button.item.userData == nil) {
+    if (button.item.userData == nil) {
         return;
     }
 	
 	[self beginEditing];
 	
-    [button setSelected:NO];
-    [button setHighlighted:NO];
-    [self startDraggingButton:button withEvent:event];
+	button.selected = NO;
+	button.highlighted = NO;
+	
+	[self startDraggingButton:button withEvent:event];
 }
 
 

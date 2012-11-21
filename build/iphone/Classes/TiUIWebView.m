@@ -290,7 +290,10 @@ static NSString * const kAutonomAppJavascript = @"Ti.App={};Ti.API={};Ti.App._li
 	if (reloadData != nil)
 	{
 		[self performSelector:reloadMethod withObject:reloadData withObject:reloadDataProperties];
-		return;
+		//[timob-10846] On iOS 6 we have to reload the webview otherwise views seems to be misplaced.
+        if (![TiUtils isIOS6OrGreater]) {
+            return;
+        }
 	}
 	[webview reload];
 }
@@ -646,13 +649,11 @@ static NSString * const kAutonomAppJavascript = @"Ti.App={};Ti.API={};Ti.App._li
 	if ([scheme hasPrefix:@"http"] || [scheme hasPrefix:@"app"] || [scheme hasPrefix:@"file"] || [scheme hasPrefix:@"ftp"])
 	{
 		DebugLog(@"[DEBUG] New scheme: %@",request);
-        BOOL valid = !ignoreNextRequest;
-        if ([scheme hasPrefix:@"http"]) {
-            //UIWebViewNavigationTypeOther means we are either in a META redirect
-            //or it is a js request from within the page 
-            valid = valid && (navigationType != UIWebViewNavigationTypeOther);
-        }
-		if (valid)
+		if (ignoreNextRequest)
+		{
+			ignoreNextRequest = NO;
+		}
+		else
 		{
 			[self setReloadData:[newUrl absoluteString]];
 			[self setReloadDataProperties:nil];
@@ -697,8 +698,7 @@ static NSString * const kAutonomAppJavascript = @"Ti.App={};Ti.API={};Ti.App._li
 		NSDictionary *event = url == nil ? nil : [NSDictionary dictionaryWithObject:[self url] forKey:@"url"];
 		[self.proxy fireEvent:@"load" withObject:event];
 	}
-	[webView setNeedsDisplay];
-	ignoreNextRequest = NO;
+	
 	TiViewProxy * ourProxy = (TiViewProxy *)[self proxy];
 	[ourProxy contentsWillChange];
 }

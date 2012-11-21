@@ -1,1 +1,1 @@
-/Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/Resources/db/RemoteDatabase.js
+/Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/Resources/db/RemoteDatabase.js

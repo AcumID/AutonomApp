@@ -45,10 +45,11 @@ function RegTimeWin(title) {
 		
 	function viewUpdater(){
 	for (var i=0; i<workersOnAssignment.length; i++) {
+		console.log(workersOnAssignment[i]);
 		workersOnAssignment[i].label = Ti.UI.createLabel({
 	  			top: 40,
 	  			font: {fontSize: 24},
-	  			text: "Opdaterer...",
+	  			text: workersOnAssignment[i].firstName+" har arbejdet "+workersOnAssignment[i].workHours+" timer.",
 	  			width: Ti.UI.SIZE
 	  	});
 	  	workersOnAssignment[i].slider = Titanium.UI.createSlider({
@@ -61,7 +62,6 @@ function RegTimeWin(title) {
 	  	});
 		workersOnAssignment[i].slider.addEventListener("change", function(e){
 			var j = e.source.id;
-			//Husk at opdater arrayet af perosner
 			Ti.App.Properties.getList("workersOnAssignment",workersOnAssignment);
 
 			workersOnAssignment[j].workHours = Math.ceil(e.source.value);
@@ -203,7 +203,8 @@ function RegTimeWin(title) {
 		
 		// Antal arbejdstimer
 		for (var i=0; i < workersOnAssignment.length; i++) {
-		 	if (workersOnAssignment[i].isJourneyman = true){
+			console.log(workersOnAssignment[i].isJourneyman);
+		 	if (workersOnAssignment[i].isJourneyman >0){
 		  		journeymanHours += workersOnAssignment[i].workHours;
 			} else {
 				apprenticeHours += workersOnAssignment[i].workHours;

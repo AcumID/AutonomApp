@@ -5,38 +5,38 @@ reporting an issue to help us understand your environment, build settings
 and aid in debugging. Please attach this log to any issue that you report.
 ================================================================================
 
-Starting build at 11/21/12 20:47
+Starting build at 11/21/12 22:42
 
 Build details:
 
-   timestamp=11/09/12 12:46
+   timestamp=10/02/12 16:16
    module_apiversion=2
-   version=2.1.4
-   githash=51f2c64
+   version=2.1.3
+   githash=15997d0
 
 
 Script arguments:
-   /Users/mikkelsoerensen/Library/Application Support/Titanium/mobilesdk/osx/2.1.4.GA/iphone/builder.py
+   /Users/MikkelPrivat/Library/Application Support/Titanium/mobilesdk/osx/2.1.3.GA/iphone/builder.py
    simulator
    6.0
-   /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp
+   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2
    com.com.AutonomApp
    AutonomApp
    ipad
    ipad
    
 
-Building from: /Users/mikkelsoerensen/Library/Application Support/Titanium/mobilesdk/osx/2.1.4.GA/iphone
-Platform: Darwin Kernel Version 11.4.2: Thu Aug 23 16:26:45 PDT 2012; root:xnu-1699.32.7~1/RELEASE_I386
+Building from: /Users/MikkelPrivat/Library/Application Support/Titanium/mobilesdk/osx/2.1.3.GA/iphone
+Platform: Darwin Kernel Version 12.2.0: Sat Aug 25 00:48:52 PDT 2012; root:xnu-2050.18.24~1/RELEASE_X86_64
 
 Xcode path is: /Applications/Xcode.app/Contents/Developer
 
 
-githash=51f2c64, existing_git_hash=51f2c64
-writing contents of /Users/mikkelsoerensen/Documents/Titanium_Studio_Workspace/AutonomApp/build/iphone/project.xcconfig:
+githash=15997d0, existing_git_hash=15997d0
+writing contents of /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/project.xcconfig:
 
-TI_VERSION=2.1.4.GA
-TI_SDK_DIR=/Users/mikkelsoerensen/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
+TI_VERSION=2.1.3.GA
+TI_SDK_DIR=/Users/MikkelPrivat/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
 TI_APPID=com.com.AutonomApp
 OTHER_LDFLAGS[sdk=iphoneos*]=$(inherited) -weak_framework iAd
 OTHER_LDFLAGS[sdk=iphonesimulator*]=$(inherited) -weak_framework iAd

@@ -46,7 +46,6 @@ var tbl_data_selected = [];
 
 //adds content to tbl data from DB
 function populatorDB(element){
-
 	var dataToPopulateWith=db.gAllByAssignment(assignment.toLowerCase());
 	for (place in dataToPopulateWith) {
 		var row = Ti.UI.createTableViewRow({
