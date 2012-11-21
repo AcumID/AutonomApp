@@ -150,6 +150,7 @@ function Database() {
 	
 	api.gDataElementByName = function(name){
 		var result = null;
+		console.log("gDataElementByName sger "+name);
 		var resultSet = db.execute('SELECT * FROM materials WHERE name = ?', name);
 		if(resultSet.isValidRow()){
 			result = {

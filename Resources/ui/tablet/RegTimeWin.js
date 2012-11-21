@@ -110,14 +110,15 @@ function RegTimeWin(title) {
 	
 	var talkToCustomer = false;
 	var seeCustomer = false;
-	var tableData = [{title: 'Snakket med kunde', hasCheck: talkToCustomer}, {title: 'Set kunde', hasCheck: seeCustomer}];
+	var tableData = [{title: 'Snakket med kunde', hasCheck: talkToCustomer, backgroundColor:"#F7F0DE"}, {backgroundColor:"#F7F0DE", title: 'Set kunde', hasCheck: seeCustomer}];
 	
 	var customerPickers = Ti.UI.createTableView({
 		style: Titanium.UI.iPhone.TableViewStyle.GROUPED,
 		data: tableData,
-		height: 180,
+		height: 200,
 		width: "50%",
-		scrollable: false
+		scrollable: false,
+		backgroundColor: "transparent",	
 	});
 	customerPickers.addEventListener('click', function(e){
 		e.row.hasCheck = !e.row.hasCheck;
@@ -134,7 +135,8 @@ function RegTimeWin(title) {
 	
 	var sendBtn = Ti.UI.createButton({
 		title: 'Send dagsseddel',
-		right: '10%'
+		right: '10%',
+		color: 'black'
 	});
 	sendBtn.addEventListener('click', function(e){
 		var dagseddelView = Ti.UI.createWindow ({backgroundColor: 'white', layout: 'vertical'});
@@ -229,7 +231,8 @@ function RegTimeWin(title) {
 		
 		var submitButton = Ti.UI.createButton({
 			title: 'Send dagsseddel',
-			right: '10%'
+			right: '10%',
+			color: 'black'
 		});
 		view4.add(submitButton);
 		
@@ -295,7 +298,8 @@ function RegTimeWin(title) {
 		//annullerknap
 		var cancelBtn = Ti.UI.createButton({
 			title: 'Annuller',
-			right: '10%'
+			right: '10%',
+			color: 'black'
 		});
 		view4.add(cancelBtn);
 		cancelBtn.addEventListener('click',function(){

@@ -16,6 +16,13 @@ function WelcomeWin(title) {
 	var assignments = Ti.App.Properties.getList('assignments', []);
 	var location = Ti.App.Properties.getString('location', "Adresse");
 	
+	var logo = Ti.UI.createImageView({
+		image: '/images/SkinnerupLogo.png',
+		right: 0,
+		top:1,
+		zIndex: -1
+	});
+	
 	//for making buttons in right order
 	var zIndexCounter = 1;
 
@@ -35,10 +42,11 @@ function WelcomeWin(title) {
 	 * */
 	
 	var self = Ti.UI.createWindow({title:title, backgroundImage: "images/back.png", layout: 'vertical'});
-	
+	self.add(logo);
 	var welcomeView = Ti.UI.createView ({width:"90%", height:Ti.UI.SIZE, layout: 'horizontal'});
 	self.add(welcomeView);
-		
+	
+	
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
 		top: 100,
@@ -71,6 +79,7 @@ function WelcomeWin(title) {
 		var btn = Ti.UI.createButton({
 			title: name,
 			top: 120,
+			color: "black",
 			zIndex:zIndexCounter
 		});
 		zIndexCounter++;	
@@ -80,7 +89,9 @@ function WelcomeWin(title) {
 		welcomeView.add(btn);
 	}
 	var addBtn = Ti.UI.createButton({
-		title:'+'
+		title:'+',
+		font: {fontSize: 30},
+		color: "black"
 	});
 	addBtn.addEventListener('click', function() {
 		createOgField();
@@ -99,12 +110,12 @@ function WelcomeWin(title) {
 		for(var i=0; i<persons.length; i++){
 			buttons.push(persons[i].firstName);
 		}
-		
 		buttons.push('Slet');
 		buttons.push('Annuller');
 		var nameList = Ti.UI.createOptionDialog({
 			title: 'Vælg person',
-			options: buttons
+			options: buttons,
+			destructive: persons.length+1
 		});
 		
 		var clickHandler = function(e){			
@@ -197,6 +208,7 @@ function WelcomeWin(title) {
 		width:250,
 		height:40,
 		top:10,
+		color: "black",
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 	});
 	
@@ -205,10 +217,11 @@ function WelcomeWin(title) {
 		assignmentNames.push(db.gAllAssignments()[place].name);
 	};
 	assignmentNames.push("Annuller");
+	assignmentNames.push("");
 	var assignmentDialog = Titanium.UI.createOptionDialog({
     		title: 'Vælg opgave',
     		options: assignmentNames,
-    		destructive: assignmentNames.length-1
+    		cancel: assignmentNames.length-1
 	});
 	assignmentDialog.addEventListener("click",function(e){
 		switchAssignment(e);
@@ -221,15 +234,17 @@ function WelcomeWin(title) {
 	assignmentView.add(tf2);
 	
 	var switchAssignment = function(e){
-		Ti.App.Properties.setString("assignment",db.gAllAssignments()[e.index].name);
-		assignment = Ti.App.Properties.getString("assignment");
-		tf2.title=assignment;
+		if(e.index!==assignmentNames.length){
+			Ti.App.Properties.setString("assignment",db.gAllAssignments()[e.index].name);
+			assignment = Ti.App.Properties.getString("assignment");
+			tf2.title=assignment;
+		}
 	};
 	
 	var perOle = Ti.UI.createImageView({
 		image: '/images/PerOle.png',
 		right: 0,
-		top:215
+		top:128
 	});
 	self.add(perOle);
 	return self;

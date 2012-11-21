@@ -50,6 +50,7 @@ function populatorDB(element){
 	var dataToPopulateWith=db.gAllByAssignment(assignment.toLowerCase());
 	for (place in dataToPopulateWith) {
 		var row = Ti.UI.createTableViewRow({
+			backgroundColor:"#F7F0DE",
 			title: dataToPopulateWith[place].name
 		});
 		element[place]=row;
@@ -89,8 +90,7 @@ if(platform === "mobileweb"){
 	});
 } else {
 	var searchBar = Titanium.UI.createSearchBar({
-		backgroundColor: "black",
-		barColor: '#385292',
+		backgroundColor: "#F7F0DE",
 		showCancel: false,
 		hintText: "Hvad leder du efter?"
 	});
@@ -100,6 +100,7 @@ scrollView.add(searchBar);
 var tableView = Titanium.UI.createTableView({
 	headerTitle:"Forslag",
 	search: searchBar,
+	backgroundColor:"transparent"
 });
 if(platform === "ipad"){
 	tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
@@ -110,6 +111,7 @@ scrollView.add(tableView);
 
 var tableViewSelected = Titanium.UI.createTableView({
 	headerTitle:"Valgte materialer",
+	backgroundColor:"transparent"
 });
 if(platform === "ipad"){
 	tableViewSelected.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
@@ -184,7 +186,8 @@ var delButton = Ti.UI.createButton({
 	title: "Slet",
 	width: 100,
 	height: 50,
-	center: {x: 150, y: 250}	
+	center: {x: 150, y: 250},
+	color: 'black'
 });
 popOverView.add(popOverLabel);
 popOverView.add(numberInputField);
@@ -271,20 +274,25 @@ numberInputFieldRegged.addEventListener('return',function(e){
 
 searchBar.addEventListener('change',function(e){
 	var i=1;
+	var searchQuery = searchBar.value;
+	searchQuery = searchQuery.substr(0,1).toUpperCase();
+	searchQuery += searchBar.value.substr(1,searchBar.value.length).toLowerCase();
+	
+	
 	while(i<=db.gAll().length){
 		//console.log("COMPARING: "+searchBar.value+" with "+db.gDataElementById(i).name);
-		if(db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i===db.gAll().length){
+		if(
+			db.gDataElementByName(searchQuery) === null
+			
+			/*db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i===db.gAll().length*/){
 			console.log("It wasnt here");
 			addMaterialFromSearch();
 			break;
 		} else if (db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i!==db.gAll().length){
-			console.log("Proceed at "+db.gDataElementById(i).name);
-			if(nmPopOver.visible===false){
-				addMaterialFromSearch();
-			}
+			//console.log("Proceed at "+db.gDataElementById(i).name);
 			i++;
 		} else {
-			console.log("End of loop");
+			//console.log("End of loop");
 			if(nmPopOver.visible===true){
 				nmPopOver.hide();
 				nmPopOver.visible=false;
@@ -318,7 +326,8 @@ var nmPopOverAddButton = Ti.UI.createButton({
 	title: "Tilføj",
 	width: 100,
 	height: 50,
-	center: {x: 125, y: 100}	
+	center: {x: 125, y: 100},
+	color: 'black'	
 });
 
 nmPopOverView.add(nmPopOverLabel);
