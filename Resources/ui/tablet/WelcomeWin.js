@@ -3,8 +3,9 @@ function WelcomeWin(title) {
 	
 	var Database = require('db/Database');
 	var db = new Database();
+
 	
-	//clear 
+		//clear 
 	//Ti.App.Properties.setList('workersOnAssignment', []);
 	//Ti.App.Properties.setInt("journeymanHours", []);
 	
@@ -49,7 +50,7 @@ function WelcomeWin(title) {
 	
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
-		top: 100,
+		top: 120,
 		font: {fontFamily:"Segoe UI", fontSize: 56}
 	})	
 	welcomeView.add(textField);
@@ -69,8 +70,8 @@ function WelcomeWin(title) {
 	function createOgField(){
 		var textField = Ti.UI.createLabel({
 			text: " og ",
-			top: 100,
-			font: {fontFamily:"Segoe UI", fontSize: 56}
+			top: 130,
+			font: {fontFamily:"Segoe UI", fontSize: 46}
 			})
 		zIndexCounter++;	
 		welcomeView.add(textField);
@@ -78,9 +79,13 @@ function WelcomeWin(title) {
 	function createPersonButton(name){
 		var btn = Ti.UI.createButton({
 			title: name,
-			top: 120,
+			top: 130,
 			color: "black",
-			zIndex:zIndexCounter
+			backgroundColor: "transparent",
+			font: {fontFamily:"Marker Felt", fontSize: 46},
+			zIndex:zIndexCounter,
+			backgroundImage: "none"
+			
 		});
 		zIndexCounter++;	
 		btn.addEventListener('click', function(e){
@@ -89,9 +94,14 @@ function WelcomeWin(title) {
 		welcomeView.add(btn);
 	}
 	var addBtn = Ti.UI.createButton({
-		title:'+',
-		font: {fontSize: 30},
-		color: "black"
+		top: -60,
+		right: 30,
+		title:'tilføj person',
+		font: {fontSize: 20},
+		color: "black",
+		backgroundImage: "none",
+		borderColor:"#525252",
+		borderRadius:1
 	});
 	addBtn.addEventListener('click', function() {
 		createOgField();
@@ -115,7 +125,7 @@ function WelcomeWin(title) {
 		var nameList = Ti.UI.createOptionDialog({
 			title: 'Vælg person',
 			options: buttons,
-			destructive: persons.length+1
+			destructive: persons.length
 		});
 		
 		var clickHandler = function(e){			
@@ -164,22 +174,23 @@ function WelcomeWin(title) {
 	//build the location view
 	
 	var locationView = Ti.UI.createView ({
-		width:"90%", height:"10%", layout: 'horizontal'});
+		top: 30, width:"90%", height:"10%", layout: 'horizontal'});
 	self.add(locationView);
 	
 	var textField2 = Ti.UI.createLabel({
-		text: "I dag arbejder i på ",
+		text: "I dag arbejder I på ",
 		font: {fontFamily:"Segoe UI", fontSize: 30}
 	})	
 	locationView.add(textField2);
 	
 	var tf1 = Titanium.UI.createTextField({
 		value:location,
-		width:250,
-		height:40,
 		top:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
+		autocorrect:false,
+		font: {fontFamily:"Marker Felt", fontSize: 24},
+		backgroundImage: "none"
+		
 	});
 	tf1.addEventListener('return', function() {
 		// hide the keyboard
@@ -205,11 +216,12 @@ function WelcomeWin(title) {
 	
 	var tf2 = Titanium.UI.createButton({
 		title:assignment,
-		width:250,
 		height:40,
 		top:10,
 		color: "black",
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+		font: {fontFamily:"Marker Felt", fontSize: 24},
+		backgroundImage: "none"    //HOLD SÅ FINGRENE VÆK!!!!!!
 	});
 	
 	var assignmentNames=new Array();
@@ -244,7 +256,7 @@ function WelcomeWin(title) {
 	var perOle = Ti.UI.createImageView({
 		image: '/images/PerOle.png',
 		right: 0,
-		top:128
+		top:170
 	});
 	self.add(perOle);
 	return self;

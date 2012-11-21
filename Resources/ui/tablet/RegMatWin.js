@@ -18,7 +18,7 @@ function RegMatWin(title) {
 		backgroundImage: "images/back.png"
 	});
 
-var assignment = Ti.App.Properties.getString('assignment');
+var assignment = Ti.App.Properties.getString('assignment','Vinduer');
 
 Ti.App.addEventListener('updateAssignment', function(){
 	assignment = Ti.App.Properties.getString('assignment');
@@ -92,7 +92,8 @@ if(platform === "mobileweb"){
 	var searchBar = Titanium.UI.createSearchBar({
 		backgroundColor: "#F7F0DE",
 		showCancel: false,
-		hintText: "Hvad leder du efter?"
+		hintText: "Hvad leder du efter?",
+		barColor: "#FF6600"
 	});
 }
 scrollView.add(searchBar);
@@ -211,7 +212,7 @@ tableView.addEventListener('click', function(e) {
 		
 		function displayPopOver(){
 			pickerView.removeEventListener('postlayout',displayPopOver);
-			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100}});
+			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100+20*e.index}});
 			numberInputField.focus();
 		};
 					
