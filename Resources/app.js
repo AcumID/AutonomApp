@@ -42,7 +42,6 @@ if (Ti.version < 1.8 ) {
 	rdb.loadEmployees();
 	rdb.loadMaterials();
 	
-	
 	var WelcomeWin;
 	var RegMatWin;
 	var RegTimeWin;
@@ -60,6 +59,6 @@ if (Ti.version < 1.8 ) {
 	}
 */
 	var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
-	new ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin).open();
+	new ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin, ToolWin).open();
 	
 })();

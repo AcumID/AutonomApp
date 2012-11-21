@@ -1,6 +1,14 @@
 /**
  * @author Jonas
  */
+
+var RegistrationDatabase = require('db/RegistrationDatabase');
+var regdb = new RegistrationDatabase();
+var RemoteDatabase = require('db/RemoteDatabase');
+var remotedb = new RemoteDatabase();
+var Database = require('db/Database');
+var db = new Database();
+
 function RegTimeWin(title) {
 	var win = Ti.UI.createWindow({
 		title:title,
@@ -9,8 +17,8 @@ function RegTimeWin(title) {
 	});
 	
 	var self = Ti.UI.createScrollView({
-		backgroundColor:'white',
-		layout:'vertical'
+		layout:'vertical',
+		backgroundImage: "images/back.png"
 	});
 	
 	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
@@ -36,7 +44,6 @@ function RegTimeWin(title) {
 	});
 		
 	function viewUpdater(){
-
 	for (var i=0; i<workersOnAssignment.length; i++) {
 		workersOnAssignment[i].label = Ti.UI.createLabel({
 	  			top: 40,
@@ -106,10 +113,10 @@ function RegTimeWin(title) {
 	var tableData = [{title: 'Snakket med kunde', hasCheck: talkToCustomer}, {title: 'Set kunde', hasCheck: seeCustomer}];
 	
 	var customerPickers = Ti.UI.createTableView({
-		headerTitle: 'Kunde',
 		style: Titanium.UI.iPhone.TableViewStyle.GROUPED,
 		data: tableData,
 		height: 180,
+		width: "50%",
 		scrollable: false
 	});
 	customerPickers.addEventListener('click', function(e){
@@ -126,7 +133,7 @@ function RegTimeWin(title) {
 	
 	
 	var sendBtn = Ti.UI.createButton({
-		title: 'Send',
+		title: 'Send dagsseddel',
 		right: '10%'
 	});
 	sendBtn.addEventListener('click', function(e){
@@ -146,7 +153,7 @@ function RegTimeWin(title) {
 
 		var title = Ti.UI.createLabel({
 			text: 'Dagens Dagseddel',
-			font: { fontSize:40 },	
+			font: { fontSize:40 }	
 		})
 		view1.add(title);
 		
@@ -212,34 +219,76 @@ function RegTimeWin(title) {
 		
 		//materialelsite
 		
+		var MatListView = require("ui/common/MatListView");
+		var matListView = new MatListView(regdb.gAll());
+		view3.add(matListView);
+		
+		
 		//underskrivnings ting
 		
 		
 		var submitButton = Ti.UI.createButton({
-			title: 'Send',
+			title: 'Send dagsseddel',
 			right: '10%'
 		});
 		view4.add(submitButton);
+		
 		submitButton.addEventListener('click',function(){
 			dagseddelView.hide();
 			
-			var loader = Ti.Network.createHTTPClient();
-			loader.open('POST','http://www.rborlum.dk/boellephp/Registration/Add');
+			var assignmentid;
+			for(var i=0; i<db.gAllAssignments().length;i++){
+				if(db.gAllAssignments()[i].name===assignment){
+					assignmentid=db.gAllAssignments()[i].id;
+				}	
+			}	
 			
-			loader.onload = function(e){
-				alert('success');
+			var carhours = carHours;
+			
+			var clientseen;
+			if(seeCustomer===true){
+				clientseen=1;	
+			} else {
+				clientseen=0;
+			}
+			
+			var clienttalked;
+			if(talkToCustomer===true){
+				clienttalked=1;	
+			} else {
+				clienttalked=0;
+			}
+			
+			function Employed(id,hours){
+				this.employee_id = id;
+				this.hours = hours;
 			};
-		
-			loader.onerror = function(e){
-				alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
-				return loaded=true;
+			var employees = new Array();
+			for (place in workersOnAssignment){
+				var employeeId;
+				for(var i=0; i<db.gAllAssignments().length;i++){
+					if(db.gAllEmployees()[i].name===workersOnAssignment[place].firstName){
+						employeeId=db.gAllEmployees()[i].id;
+					}	
+				}	
+				employees.push(new Employed(employeeId,workersOnAssignment[place].workHours));
 			};
-			loader.send({
-    			name:'My awesome blog',
-    			assignment_id:1
-			});
-	
-		})
+			
+			function Material(id,number){
+				this.material_id = id;
+				this.number = number;
+			};
+			var materials = new Array();
+			for (var i=0; i<regdb.gAll().length;i++){
+				var matId = db.gDataElementByName(regdb.gAll()[i].name).id;
+				materials.push(new Material(matId,regdb.gAll()[i].number));
+			};
+			console.log(employees);
+			console.log(materials);
+			remotedb.poster(location,assignmentid,carhours,clientseen,clienttalked,employees,materials);
+			alert("Tak for i dag og kom godt hjem");
+			//TODO Rinse?
+		});
 		
 		
 		

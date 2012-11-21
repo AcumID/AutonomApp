@@ -7,12 +7,15 @@ var Database = require('db/Database');
 var db = new Database();
 var RegistrationDatabase = require('db/RegistrationDatabase');
 var rdb = new RegistrationDatabase();
+var RemoteDatabase = require('db/RemoteDatabase');
+var remotedb = new RemoteDatabase();
 
 function RegMatWin(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white',
-		layout: "horizontal"
+	//	backgroundColor:'white',
+		layout: "horizontal",
+		backgroundImage: "images/back.png"
 	});
 
 var assignment = Ti.App.Properties.getString('assignment');
@@ -26,7 +29,7 @@ Ti.App.addEventListener('updateAssignment', function(){
 
 var scrollView = Ti.UI.createScrollView({
 	layout: "vertical",
-	backgroundColor:"#858585",
+	backgroundColor:"#55858585",
 	borderColor:"#9D9D9D",
 	borderRadius:1,
 	width:"50%"
@@ -34,7 +37,7 @@ var scrollView = Ti.UI.createScrollView({
 self.add(scrollView);
 var scrollView2 = Ti.UI.createScrollView({
 	layout: "vertical",
-	backgroundColor:"#EEEEEE",
+	//backgroundColor:"#EEEEEE",
 	width:"50%"	});
 self.add(scrollView2);
 
@@ -269,13 +272,16 @@ numberInputFieldRegged.addEventListener('return',function(e){
 searchBar.addEventListener('change',function(e){
 	var i=1;
 	while(i<=db.gAll().length){
-		console.log("COMPARING: "+searchBar.value+" with "+db.gDataElementById(i).name);
+		//console.log("COMPARING: "+searchBar.value+" with "+db.gDataElementById(i).name);
 		if(db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i===db.gAll().length){
 			console.log("It wasnt here");
 			addMaterialFromSearch();
 			break;
 		} else if (db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i!==db.gAll().length){
 			console.log("Proceed at "+db.gDataElementById(i).name);
+			if(nmPopOver.visible===false){
+				addMaterialFromSearch();
+			}
 			i++;
 		} else {
 			console.log("End of loop");
@@ -328,11 +334,13 @@ nmPopOverAddButton.addEventListener('click',function(e){
 	nameOfNewMaterial = nameOfNewMaterial.toLowerCase().charAt(0).toUpperCase()+nameOfNewMaterial.toLowerCase().substr(1,nameOfNewMaterial.length);
 	console.log("Adding "+nameOfNewMaterial+" to database");
 	db.addDataElementFromName(nameOfNewMaterial);
+	remotedb.postMaterial(nameOfNewMaterial);
 	populatorDB(tbl_data);
 	updateTableViews();
 	searchBar.value = "";
 	searchBar.value = searchQuery;
 	searchBar.focus();
+	self.fireEvent('breaksearch');
 });
 
 var addMaterialFromSearch = function(){

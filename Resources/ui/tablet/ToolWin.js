@@ -33,8 +33,9 @@ function ToolWin(title) {
 	self.add(tf2);
 	
 	var isJourneymanPicker = Ti.UI.createSwitch({
-		
+		value: true
 	});
+	self.add(isJourneymanPicker);
 	
 	var Person = function(firstName, lastName, isJourneyman){
 		this.firstName = firstName;
