@@ -9,8 +9,8 @@ function RegTimeWin(title) {
 	});
 	
 	var self = Ti.UI.createScrollView({
-		backgroundColor:'white',
-		layout:'vertical'
+		layout:'vertical',
+		backgroundImage: "images/back.png"
 	});
 	
 	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
@@ -106,10 +106,10 @@ function RegTimeWin(title) {
 	var tableData = [{title: 'Snakket med kunde', hasCheck: talkToCustomer}, {title: 'Set kunde', hasCheck: seeCustomer}];
 	
 	var customerPickers = Ti.UI.createTableView({
-		headerTitle: 'Kunde',
 		style: Titanium.UI.iPhone.TableViewStyle.GROUPED,
 		data: tableData,
 		height: 180,
+		width: "50%",
 		scrollable: false
 	});
 	customerPickers.addEventListener('click', function(e){

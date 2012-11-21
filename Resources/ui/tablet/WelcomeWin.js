@@ -1,6 +1,8 @@
 var platform = Ti.Platform.osname;
 function WelcomeWin(title) {
-	
+	/**
+	 * Author: Peter Martin Lolholm Gammelby
+	 */
 	
 	//clear 
 	//Ti.App.Properties.setList('workersOnAssignment', []);
@@ -31,13 +33,14 @@ function WelcomeWin(title) {
 	 Her Bygges f¯rste View, der kan Êndre hvilke personer der er pÂ arbejde
 	 * */
 	
-	var self = Ti.UI.createWindow({title:title, backgroundColor:'white', layout: 'vertical'});
+	var self = Ti.UI.createWindow({title:title, backgroundImage: "images/back.png", layout: 'vertical'});
 	
 	var welcomeView = Ti.UI.createView ({width:"90%", height:Ti.UI.SIZE, layout: 'horizontal'});
 	self.add(welcomeView);
 		
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
+		top: 100,
 		font: {fontFamily:"Segoe UI", fontSize: 56}
 	})	
 	welcomeView.add(textField);
@@ -57,6 +60,7 @@ function WelcomeWin(title) {
 	function createOgField(){
 		var textField = Ti.UI.createLabel({
 			text: " og ",
+			top: 100,
 			font: {fontFamily:"Segoe UI", fontSize: 56}
 			})
 		zIndexCounter++;	
@@ -65,6 +69,7 @@ function WelcomeWin(title) {
 	function createPersonButton(name){
 		var btn = Ti.UI.createButton({
 			title: name,
+			top: 120,
 			zIndex:zIndexCounter
 		});
 		zIndexCounter++;	
@@ -73,6 +78,14 @@ function WelcomeWin(title) {
 		});
 		welcomeView.add(btn);
 	}
+	var addBtn = Ti.UI.createButton({
+		title:'+'
+	});
+	addBtn.addEventListener('click', function() {
+		createOgField();
+		createPersonButton('Ny person');
+	});
+	self.add(addBtn);
 	
 	function createPersonPicker(currentName, zIndex){
 		Ti.App.fireEvent('updatePersons');
@@ -130,14 +143,6 @@ function WelcomeWin(title) {
 		//Ti.App.fireEvent('updateWorkersOnAssignment');
 		zIndexCounter-=2;
 	}
-	var addBtn = Ti.UI.createButton({
-		title:'+'
-	});
-	addBtn.addEventListener('click', function() {
-		createOgField();
-		createPersonButton('Ny person');
-	});
-	self.add(addBtn);
 
 	//build the location view
 	
@@ -200,10 +205,12 @@ function WelcomeWin(title) {
 	assignmentView.add(tf2);
 	
 	var perOle = Ti.UI.createImageView({
-		image: '/images/perole.jpg',
-		
+		image: '/images/PerOle.png',
+		right: 0,
+		bottom: 0
 	});
 	self.add(perOle);
+
 	return self;
 };
 

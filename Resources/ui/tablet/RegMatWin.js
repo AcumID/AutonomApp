@@ -11,14 +11,15 @@ var rdb = new RegistrationDatabase();
 function RegMatWin(title) {
 	var self = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white',
-		layout: "horizontal"
+	//	backgroundColor:'white',
+		layout: "horizontal",
+		backgroundImage: "images/back.png"
 	});
 
 
 var scrollView = Ti.UI.createScrollView({
 	layout: "vertical",
-	backgroundColor:"#858585",
+	backgroundColor:"#55858585",
 	borderColor:"#9D9D9D",
 	borderRadius:1,
 	width:"50%"
@@ -28,7 +29,7 @@ self.add(scrollView);
 
 var scrollView2 = Ti.UI.createScrollView({
 	layout: "vertical",
-	backgroundColor:"#EEEEEE",
+	//backgroundColor:"#EEEEEE",
 	width:"50%"	});
 self.add(scrollView2);
 
