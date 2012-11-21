@@ -32,12 +32,16 @@ if (Ti.version < 1.8 ) {
 	
 	//init Ti.App.Properties
 	
-	//init Database
+	//init Database	
 	var Database = require('db/Database');
 	var RemoteDatabase = require('db/RemoteDatabase');
 	var db = new Database();
-	//var rdb = new RemoteDatabase(db);
-	//rdb.loadRemoteData();
+	var rdb = new RemoteDatabase(db);
+	rdb.login("SampleUser","SamplePass");
+	rdb.loadAssignments();
+	rdb.loadEmployees();
+	rdb.loadMaterials();
+	
 	
 	var WelcomeWin;
 	var RegMatWin;
@@ -56,6 +60,6 @@ if (Ti.version < 1.8 ) {
 	}
 */
 	var ApplicationTabGroup = require('ui/common/ApplicationTabGroup');
+	new ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin).open();
 	
-	new ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin, ToolWin).open();
 })();

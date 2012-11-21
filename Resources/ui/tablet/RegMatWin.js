@@ -15,6 +15,14 @@ function RegMatWin(title) {
 		layout: "horizontal"
 	});
 
+var assignment = Ti.App.Properties.getString('assignment');
+
+Ti.App.addEventListener('updateAssignment', function(){
+	assignment = Ti.App.Properties.getString('assignment');
+	populatorDB(tbl_data);
+	updateTableViews();
+});	
+
 
 var scrollView = Ti.UI.createScrollView({
 	layout: "vertical",
@@ -35,9 +43,11 @@ var tbl_data_selected = [];
 
 //adds content to tbl data from DB
 function populatorDB(element){
-	for (place in db.gAll()) {
+
+	var dataToPopulateWith=db.gAllByAssignment(assignment.toLowerCase());
+	for (place in dataToPopulateWith) {
 		var row = Ti.UI.createTableViewRow({
-			title: db.gAll()[place].name
+			title: dataToPopulateWith[place].name
 		});
 		element[place]=row;
 	};

@@ -222,7 +222,26 @@ function RegTimeWin(title) {
 		view4.add(submitButton);
 		submitButton.addEventListener('click',function(){
 			dagseddelView.hide();
+			
+			var loader = Ti.Network.createHTTPClient();
+			loader.open('POST','http://www.rborlum.dk/boellephp/Registration/Add');
+			
+			loader.onload = function(e){
+				alert('success');
+			};
+		
+			loader.onerror = function(e){
+				alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
+				return loaded=true;
+			};
+			loader.send({
+    			name:'My awesome blog',
+    			assignment_id:1
+			});
+	
 		})
+		
+		
 		
 		//annullerknap
 		var cancelBtn = Ti.UI.createButton({

@@ -1,6 +1,8 @@
 var platform = Ti.Platform.osname;
 function WelcomeWin(title) {
 	
+	var Database = require('db/Database');
+	var db = new Database();
 	
 	//clear 
 	//Ti.App.Properties.setList('workersOnAssignment', []);
@@ -10,7 +12,8 @@ function WelcomeWin(title) {
 	
 	var persons = Ti.App.Properties.getList('persons', []); 
 	var workersOnAssignment = Ti.App.Properties.getList('workersOnAssignment', []);
-	var assignment = Ti.App.Properties.getString('assignment', "");
+	var assignment = Ti.App.Properties.getString('assignment', "Vinduer");
+	var assignments = Ti.App.Properties.getList('assignments', []);
 	var location = Ti.App.Properties.getString('location', "Adresse");
 	
 	//for making buttons in right order
@@ -181,22 +184,56 @@ function WelcomeWin(title) {
 	})	
 	assignmentView.add(textField3);
 	
-	var tf2 = Titanium.UI.createTextField({
-		value:assignment,
+	var tf2 = Titanium.UI.createButton({
+		title:assignment,
 		width:250,
 		height:40,
 		top:10,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
+		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 	});
-	tf2.addEventListener('return', function() {
-		// hide the keyboard
-		tf2.blur();
+	
+	var assignmentNames=new Array();
+	for (place in db.gAllAssignments()){
+		assignmentNames.push(db.gAllAssignments()[place].name);
+		
+	};
+	
+	
+	//assignmentDialog.options.push("Annullér");
+	
+	tf2.addEventListener("click",function(e){
+		
+	var assignmentDialog = Titanium.UI.createOptionDialog({
+    	title: 'Vælg opgave',
+    	options: assignmentNames,
+    	destructive: assignments.length
 	});
-	tf2.addEventListener('change', function(e) {
-		// save the text field's value 
-		Titanium.App.Properties.setString("assignment",e.value);
+		
+		
+		assignmentDialog.show();
 	});
+	
+	/*assignmentDialog.addEventListener('click',function(e){
+		var selectedAssignment=assignment;
+		switch(e.index){
+			case 0: selectedAssignment='Vinduer'; break;
+			case 1: selectedAssignment='Tag'; break;
+			case 2: selectedAssignment='Solceller'; break;
+			case 3: selectedAssignment='Småarbejde'; break;
+			case 4: selectedAssignment='Gulv'; break;
+			case 5: selectedAssignment='Loft'; break;
+			case 6: selectedAssignment='Hus'; break;
+			default: break;
+		}
+		Titanium.App.Properties.setString("assignment",selectedAssignment);
+		Ti.App.fireEvent('updateAssignment');
+		tf2.setTitle(assignment);
+		self.remove(assignmentView);
+		assignmentView.remove(tf2);
+		assignmentView.add(tf2);
+		self.add(assignmentView);
+		
+	});*/
 	assignmentView.add(tf2);
 	
 	var perOle = Ti.UI.createImageView({

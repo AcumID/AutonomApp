@@ -1,12 +1,11 @@
-function ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin, ToolWin) {
+function ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin) {
 	//create module instance
 	var self = Ti.UI.createTabGroup();
 	
 	//create app tabs
 	var win1 = new WelcomeWin("Velkommen"),
 		win2 = new RegMatWin("Registrering af materialer"),
-		win3 = new RegTimeWin("Registrering af tid"),
-		win4 = new ToolWin("Værktøjskasse");
+		win3 = new RegTimeWin("Registrering af tid")
 	
 	var tab1 = Ti.UI.createTab({
 		title: "Velkommen",
@@ -29,17 +28,9 @@ function ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin, ToolWin) {
 	});
 	win3.containingTab = tab3;
 	
-	var tab4 = Ti.UI.createTab({
-		title: "Værktøjskasse",
-		icon: '/images/24.png',
-		window: win4
-	});
-	win3.containingTab = tab3;
-	
 	self.addTab(tab1);
 	self.addTab(tab2);
 	self.addTab(tab3);
-	self.addTab(tab4);
 	
 	return self;
 };
