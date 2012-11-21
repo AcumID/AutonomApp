@@ -32,4 +32,10 @@ dependencies: \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/LayoutConstraint.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiGradient.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiRect.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiViewController.h
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiViewController.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUIiPadSplitWindowProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiWindowProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiTab.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiTabGroup.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUIWindow.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUIiPadDocumentViewerProxy.h

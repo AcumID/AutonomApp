@@ -31,7 +31,8 @@ if (Ti.version < 1.8 ) {
 	//var isTablet = true;
 	
 	//init Ti.App.Properties
-	Ti.App.Properties.setString("assignment","Vinduer");
+
+	
 	//init Database	
 	var Database = require('db/Database');
 	var RemoteDatabase = require('db/RemoteDatabase');

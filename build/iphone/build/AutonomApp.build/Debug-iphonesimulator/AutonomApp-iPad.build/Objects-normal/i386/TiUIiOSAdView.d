@@ -28,4 +28,8 @@ dependencies: \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiBuffer.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiBlob.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/LayoutConstraint.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiGradient.h
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiGradient.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUIiOSAdViewProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUIViewProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiViewProxy.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiRect.h

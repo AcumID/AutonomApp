@@ -1,6 +1,7 @@
 function ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin, ToolWin) {
 	//create module instance
 	var self = Ti.UI.createTabGroup();
+	self.activeTabBackgroundSelectedColor="#FF6600";
 	
 	//create app tabs
 	var win1 = new WelcomeWin("Velkommen"),

@@ -15,6 +15,9 @@ dependencies: \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/headers/TiCore/TiContextRefPrivate.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollCallback.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollObject.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollBridge.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/Bridge.h \
+  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiModule.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiUtils.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiColor.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiDimension.h \
@@ -24,10 +27,7 @@ dependencies: \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiBlob.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiApp.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiHost.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/Bridge.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiStylesheet.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/KrollBridge.h \
-  /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiModule.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/XHRBridge.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiRootViewController.h \
   /Users/MikkelPrivat/Documents/Titanium_Studio_Workspace/AA2/build/iphone/Classes/TiRootController.h \

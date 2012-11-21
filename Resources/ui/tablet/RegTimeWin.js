@@ -12,7 +12,8 @@ var db = new Database();
 function RegTimeWin(title) {
 	var win = Ti.UI.createWindow({
 		title:title,
-		backgroundColor:'white',
+		barColor:"#FF6600",
+		//backgroundColor:'white',
 		layout:'vertical'
 	});
 	
@@ -22,8 +23,8 @@ function RegTimeWin(title) {
 	});
 	
 	var workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
-	var assignment = Ti.App.Properties.getString('assignment');
-	var location = Ti.App.Properties.getString('location');
+	var assignment = Ti.App.Properties.getString('assignment','Vinduer');
+	var location = Ti.App.Properties.getString('location','Ingen lokation angivet');
 		// Variables containing the hours worked
 	var journeymanHours = 0;
 	var apprenticeHours = 0;
@@ -44,8 +45,9 @@ function RegTimeWin(title) {
 	});
 		
 	function viewUpdater(){
-	for (var i=0; i<workersOnAssignment.length; i++) {
-		console.log(workersOnAssignment[i]);
+		//Husk at opdater arrayet af perosner
+		workersOnAssignment=Ti.App.Properties.getList("workersOnAssignment",workersOnAssignment);
+		for (var i=0; i<workersOnAssignment.length; i++) {
 		workersOnAssignment[i].label = Ti.UI.createLabel({
 	  			top: 40,
 	  			font: {fontSize: 24},
@@ -62,7 +64,6 @@ function RegTimeWin(title) {
 	  	});
 		workersOnAssignment[i].slider.addEventListener("change", function(e){
 			var j = e.source.id;
-			Ti.App.Properties.getList("workersOnAssignment",workersOnAssignment);
 
 			workersOnAssignment[j].workHours = Math.ceil(e.source.value);
 			workersOnAssignment[j].label.text = workersOnAssignment[j].firstName+" har arbejdet "+workersOnAssignment[j].workHours+" timer.";
@@ -108,8 +109,8 @@ function RegTimeWin(title) {
 	});
 	self.add(checkBoxView);
 	
-	var talkToCustomer = false;
-	var seeCustomer = false;
+	var talkToCustomer = Ti.App.Properties.getBool("talkToCustomer",false);
+	var seeCustomer = Ti.App.Properties.getBool("seeCustomer",false);
 	var tableData = [{title: 'Snakket med kunde', hasCheck: talkToCustomer, backgroundColor:"#F7F0DE"}, {backgroundColor:"#F7F0DE", title: 'Set kunde', hasCheck: seeCustomer}];
 	
 	var customerPickers = Ti.UI.createTableView({
@@ -124,8 +125,10 @@ function RegTimeWin(title) {
 		e.row.hasCheck = !e.row.hasCheck;
 		if(e.index === 0){
 			talkToCustomer = e.row.hasCheck;
+			Ti.App.Properties.setBool("talkToCustomer",talkToCustomer);
 		} else {
 			seeCustomer = e.row.hasCheck;
+			Ti.App.Properties.setBool("seeCustomer",seeCustomer);
 		}
 	});
 	

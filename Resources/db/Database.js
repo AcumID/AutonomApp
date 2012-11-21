@@ -114,6 +114,7 @@ function Database() {
 		}
 		resultSet.close();
 		//TODO sort results by assignment, following by alphabetical rests
+		resultsToSort.sort();
 		for (place in resultsToSort){
 			if(resultsToSort[place].assignments!==null){
 				if (resultsToSort[place].assignments.indexOf(assignment)!==-1){
