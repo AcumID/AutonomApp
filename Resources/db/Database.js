@@ -19,6 +19,12 @@ function Database() {
 		return db.lastInsertRowId;
 	};
 	
+	api.addDataElementFromName=function(name){
+		name=name.toString();
+		db.execute('INSERT INTO materials (name, unit) VALUES ("'+name+'", "STK")');
+		return db.lastInsertRowId;
+	};
+	
 	//Get all dataelements in database
 	api.gAll = function(){
 		var results = [];

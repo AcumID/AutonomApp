@@ -36,8 +36,8 @@ if (Ti.version < 1.8 ) {
 	var Database = require('db/Database');
 	var RemoteDatabase = require('db/RemoteDatabase');
 	var db = new Database();
-	var rdb = new RemoteDatabase(db);
-	rdb.loadRemoteData();
+	//var rdb = new RemoteDatabase(db);
+	//rdb.loadRemoteData();
 	
 	var WelcomeWin;
 	var RegMatWin;

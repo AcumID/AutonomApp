@@ -25,8 +25,6 @@ var scrollView = Ti.UI.createScrollView({
 	width:"50%"
 	});
 self.add(scrollView);
-
-
 var scrollView2 = Ti.UI.createScrollView({
 	layout: "vertical",
 	//backgroundColor:"#EEEEEE",
@@ -34,39 +32,39 @@ var scrollView2 = Ti.UI.createScrollView({
 self.add(scrollView2);
 
 var tbl_data = [];
-
 var tbl_data_selected = [];
-
-
 
 //adds content to tbl data from DB
 function populatorDB(element){
-for (var i = 1; i <= db.gAll().length; i++) {
-	var row = Ti.UI.createTableViewRow({
-		title: db.gDataElementById(i).name
-	});
-	
-	
-	
-	element.push(row);
+	for (place in db.gAll()) {
+		var row = Ti.UI.createTableViewRow({
+			title: db.gAll()[place].name
+		});
+		element[place]=row;
 	};
 };
 
 //adds content to tbl data selected from RDB
-function populatorRDB(element){
-	
-	for (var i = 1; i <= rdb.gAll().length; i++) {
+function populatorRDB(element,ondelete){
+	ondelete = typeof ondelete !== 'undefined' ? ondelete : false;
+	var i=0;
+	for (place in rdb.gAll()) {
 		var row = Ti.UI.createTableViewRow({
-			title: rdb.gDataElementById(i).number+"   "+rdb.gDataElementById(i).name
+			title: rdb.gAll()[place].number+"   "+rdb.gAll()[place].name
 		});
-		
-		element[i-1]=row;
+		element[place]=row;
+		if(place===0){
+			i+=1;
+		}
+		i++;
 	};
+	if(ondelete){
+		element.splice(i,1);	
+	}
 };
 
 populatorDB(tbl_data);
 populatorRDB(tbl_data_selected);
-
 
 //Creating Searchbar
 if(platform === "mobileweb"){
@@ -74,11 +72,11 @@ if(platform === "mobileweb"){
  		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
  		center: 50,
  		width: 250, 
- 		height: 40 
+ 		height: 40,
+ 		colors: [ { color: 'red', offset: 0.0}, { color: 'blue', offset: 0.25 }, { color: 'red', offset: 1.0 } ] 
 	});
 } else {
 	var searchBar = Titanium.UI.createSearchBar({
-		//TODO only hinttext seems to be working
 		backgroundColor: "black",
 		barColor: '#385292',
 		showCancel: false,
@@ -94,6 +92,7 @@ var tableView = Titanium.UI.createTableView({
 if(platform === "ipad"){
 	tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
 }
+
 tableView.setData(tbl_data);
 scrollView.add(tableView);
 
@@ -105,6 +104,13 @@ if(platform === "ipad"){
 }
 tableViewSelected.setData(tbl_data_selected);
 scrollView2.add(tableViewSelected);
+
+var updateTableViews = function(){
+	tableViewSelected.data=tbl_data_selected;
+	tableView.data=tbl_data;
+	tableViewSelected.setData(tableViewSelected.data);
+	tableView.setData(tableView.data);
+}
 
 var checkRedundancy = function(name){
 	var isReduntant = false;
@@ -119,51 +125,16 @@ var checkRedundancy = function(name){
 
 var currentEditElement;
 
-
-
-
-
-
-
-var popOver = Ti.UI.iPad.createPopover({
-	height:400,
-	width:300,
-	title:"Redigér antal",
-	arrowDirection:Ti.UI.iPad.POPOVER_ARROW_DIRECTION_LEFT
-});
-
-//HANDLER FOR MATERIAL-CLICK
-tableView.addEventListener('click', function(e) {
-	
-		currentEditElement=db.gDataElementByName(e.source.title);
-		
-		var pickerView = Ti.UI.createView({
-			title:"",height:20,width:1,top:20,right:0
-		});
-		
-		pickerView.addEventListener('postlayout',displayPopOver);
-		
-		e.row.add(pickerView);	
-		
-		function displayPopOver(){
-			pickerView.removeEventListener('postlayout',displayPopOver);
-			
-			popOver.addEventListener('hide',function(evt){
-				e.row.remove(pickerView)
-			});
-			
-			popOver.add(popOverView);
-			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100}});
-			numberInputField.focus();
-		};
-					
-});
-
-
+//Creating popups and subviews
+var PopOver = require("ui/common/PopOver");
+var popOver = new PopOver(false);
+var popOverRegged = new PopOver(true);
 var popOverView = Ti.UI.createView({
 	backgroundColor:"white"
+});	
+var popOverViewRegged = Ti.UI.createView({
+	backgroundColor:"white"
 });
-
 var popOverLabel = Ti.UI.createLabel({
 	text: "Hvor mange?",
 	center: {x: 150, y: 150},
@@ -171,9 +142,7 @@ var popOverLabel = Ti.UI.createLabel({
 		fontSize: 24
 	}
 });
-
 var numberInputField = Ti.UI.createTextField({
-	value: 1,
 	width: 200,
 	height: 50,
 	center: {x: 150, y: 200},
@@ -186,17 +155,60 @@ var numberInputField = Ti.UI.createTextField({
 	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
 	clearOnEdit: true
 });
-
+var numberInputFieldRegged = Ti.UI.createTextField({
+	width: 200,
+	height: 50,
+	center: {x: 150, y: 200},
+	borderRadius: 8,
+	borderColor: "black",
+	font: {
+		fontSize: 22
+	},
+	enabled: true,
+	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+	clearOnEdit: false
+});
+var delButton = Ti.UI.createButton({
+	title: "Slet",
+	width: 100,
+	height: 50,
+	center: {x: 150, y: 250}	
+});
 popOverView.add(popOverLabel);
 popOverView.add(numberInputField);
+popOver.add(popOverView);
+popOverViewRegged.add(popOverLabel);
+popOverViewRegged.add(numberInputFieldRegged);
+popOverViewRegged.add(delButton);
+popOverRegged.add(popOverViewRegged);
 
-//HANDLER FOR RETURN ON NUMBER ENTERED
+//HANDLER FOR MATERIAL-CLICK
+tableView.addEventListener('click', function(e) {
+	
+		currentEditElement=db.gDataElementByName(e.source.title);
+		
+		var pickerView = Ti.UI.createView({
+			title:"",height:20,width:1,top:20,right:0
+		});
+		pickerView.addEventListener('postlayout',displayPopOver);
+		
+		e.row.add(pickerView);	
+		
+		function displayPopOver(){
+			pickerView.removeEventListener('postlayout',displayPopOver);
+			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100}});
+			numberInputField.focus();
+		};
+					
+});
+//HANDLER FOR RETURN ON NUMBER ENTERED - MATERIAL
 numberInputField.addEventListener('return',function(e){
 	if(checkRedundancy(currentEditElement.name)){
 		//TODO Currently interprets inputTextField.value as String = mathmatics are not right.	
-		rdb.updateDataElementNumberByName(db.gDataElementByName(currentEditElement.name), (rdb.gDataElementByName(currentEditElement.name).number+e.source.value));
+		console.log("Previous number:"+rdb.gDataElementByName(db.gDataElementByName(currentEditElement.name).name).number);
+		rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name),e.source.value);
 		populatorRDB(tbl_data_selected);
-		
+		console.log("Number after:"+rdb.gDataElementByName(currentEditElement.name).number);
 	}else{
 		rdb.addDataElement(db.gDataElementByName(currentEditElement.name),e.source.value);
 		tbl_data_selected.push(
@@ -204,39 +216,155 @@ numberInputField.addEventListener('return',function(e){
 						title:rdb.gDataElementByName(currentEditElement.name).number+"   "+currentEditElement.name
 					}))	
 	}
-	e.source.value=1;
-	tableViewSelected.data = tbl_data_selected;
+	
+	updateTableViews();
+	
 	popOver.hide();
 });
-
 //HANDLER FOR REGMATERIAL-CLICK
 tableViewSelected.addEventListener('click',function(e){
 	var nameOfMaterial = e.source.title.substr(e.source.title.indexOf(" ")+3,e.source.title.length);
-	tableViewSelected.deleteRow(e.index,{animationStyle:Titanium.UI.iPhone.RowAnimationStyle.NONE});
-	rdb.deleteDataElementByName(nameOfMaterial);
-	var newIndex = 1;
-	for(dataElement in rdb.gAll()){
-		//TODO HER ER DET AT DER SKAL SKE NOGET - RAMMUS ER IGANG LIGE HER
-		rdb.updateDataElementId(dataElement,newIndex);
-		newIndex++;
+	currentEditElement=rdb.gDataElementByName(nameOfMaterial);
+	
+	var pickerView = Ti.UI.createView({
+		title:"",height:20,width:1,top:20,right:0
+	});
+		
+	pickerView.addEventListener('postlayout',displayPopOver);
+		
+	e.row.add(pickerView);	
+		
+	function displayPopOver(){
+		pickerView.removeEventListener('postlayout',displayPopOver);
+		popOverRegged.add(popOverViewRegged);
+		popOverRegged.show({view:pickerView, rect:{height:200, width:200, x:-362, y:-100}});
+		numberInputFieldRegged.setValue(currentEditElement.number.toString());
+		numberInputFieldRegged.focus();
 	};
 });
+//HANDLER FOR DELBUT-CLICK
+delButton.addEventListener('click',function(e){
+	popOverRegged.hide();
+	rdb.deleteDataElementByName(currentEditElement.name);
+	populatorRDB(tbl_data_selected,true);
+	updateTableViews();
+});
+//HANDLER FOR RETURN ON INPUT NUMBER - REGMATERIAL
+numberInputFieldRegged.addEventListener('return',function(e){
+	rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name), e.source.value);
+	populatorRDB(tbl_data_selected);
+	updateTableViews();
+	popOverRegged.hide();
+});
 
-//NOW SCROLLVIEWS HAS BEEN ADDED + EVENTLISTENERS
+searchBar.addEventListener('change',function(e){
+	var i=1;
+	while(i<=db.gAll().length){
+		console.log("COMPARING: "+searchBar.value+" with "+db.gDataElementById(i).name);
+		if(db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i===db.gAll().length){
+			console.log("It wasnt here");
+			addMaterialFromSearch();
+			break;
+		} else if (db.gDataElementById(i).name.toLowerCase().indexOf(searchBar.value.toLowerCase())===-1&&i!==db.gAll().length){
+			console.log("Proceed at "+db.gDataElementById(i).name);
+			i++;
+		} else {
+			console.log("End of loop");
+			if(nmPopOver.visible===true){
+				nmPopOver.hide();
+				nmPopOver.visible=false;
+			}
+			break;
+		}
+	}
+});
 
+var nmPopOver=Ti.UI.iPad.createPopover({
+	height: 150,
+	width: 250,
+	title: "Tilføj nyt materiale?",
+	arrowDirection: Titanium.UI.iPad.POPOVER_ARROW_DIRECTION_LEFT,
+	visible: false
+});
+
+var nmPopOverView = Ti.UI.createView({
+	backgroundColor:"white"
+});
+
+var nmPopOverLabel = Ti.UI.createLabel({
+	text: "Vil du tilføje dette materiale?",
+	center: {x: 125, y: 50},
+	font: {
+		fontSize: 18
+	}
+});
+
+var nmPopOverAddButton = Ti.UI.createButton({
+	title: "Tilføj",
+	width: 100,
+	height: 50,
+	center: {x: 125, y: 100}	
+});
+
+nmPopOverView.add(nmPopOverLabel);
+nmPopOverView.add(nmPopOverAddButton);
+nmPopOver.add(nmPopOverView);
+
+//HANDLER FOR NMADDBUT-CLICK
+nmPopOverAddButton.addEventListener('click',function(e){
+	nmPopOver.hide();
+	nmPopOver.visible=false;
+	var searchQuery = searchBar.value;
+	var nameOfNewMaterial = searchQuery;
+	nameOfNewMaterial = nameOfNewMaterial.toLowerCase().charAt(0).toUpperCase()+nameOfNewMaterial.toLowerCase().substr(1,nameOfNewMaterial.length);
+	console.log("Adding "+nameOfNewMaterial+" to database");
+	db.addDataElementFromName(nameOfNewMaterial);
+	populatorDB(tbl_data);
+	updateTableViews();
+	searchBar.value = "";
+	searchBar.value = searchQuery;
+	searchBar.focus();
+});
+
+var addMaterialFromSearch = function(){
+	var pickerView = Ti.UI.createView({
+			title:"",height:20,width:1,top:20,right:0
+		});
+	pickerView.addEventListener('postlayout',displayPopOver);
+		
+	searchBar.add(pickerView);	
+	
+	nmPopOverLabel.text = "Vil du tilføje '"+searchBar.value.toLowerCase().charAt(0).toUpperCase()+searchBar.value.toLowerCase().substr(1,searchBar.value.length)+"' ?";
+	if(nmPopOverView.children>1){
+		nmPopOverView.remove(nmPopOverLabel);
+	}
+	nmPopOverView.add(nmPopOverLabel);
+	
+		function displayPopOver(){
+			pickerView.removeEventListener('postlayout',displayPopOver);
+			console.log("Displaying popover?"+nmPopOver.visible);
+			if(nmPopOver.visible===false){
+				nmPopOver.show({view:pickerView, rect:{height:200, width:200, x:-170, y:-100}});
+				nmPopOver.visible=true;	
+			}
+		};
+};
+
+//JONAS LEGER MED BROWSING
 var browseButton = Ti.UI.createButton({
 	right: 10,
 	title: "Gennemse katalog",
-	image: "/images/64.png"
+	image: "/images/64.png" 
 });
 self.rightNavButton = browseButton;
 
+var BrowseMatWin = require("/ui/tablet/BrowseMatWin");
+
 browseButton.addEventListener("click", function(e) {
-	self.containingTab.open(Ti.UI.createWindow({
-			title: "test",
-			backgroundColor: 'white'
-		}));
-});
+	self.containingTab.open(
+	new BrowseMatWin()
+	)
+	});
 
 	return self;
 };
