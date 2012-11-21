@@ -30,7 +30,7 @@ function ApplicationTabGroup(WelcomeWin, RegMatWin, RegTimeWin, ToolWin) {
 	win3.containingTab = tab3;
 	
 	var tab4 =Ti.UI.createTab({
-		title: "toolwin",
+		title: " ",
 		window: win4
 	})
 	win4.containgingTab = tab4;

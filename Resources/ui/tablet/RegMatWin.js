@@ -35,11 +35,37 @@ var scrollView = Ti.UI.createScrollView({
 	width:"50%"
 	});
 self.add(scrollView);
-var scrollView2 = Ti.UI.createScrollView({
+
+ 
+var rightLaneView = Ti.UI.createView({
 	layout: "vertical",
+	width:"50%"
+});
+self.add(rightLaneView);
+
+ var addNewMaterialBtn = Ti.UI.createButton({
+	left: 10,
+	top: 5,
+	width: 250,
+	height: 35,
+	title: "Opret nyt materiale fra søgefelt",
+	color: "black",
+	layout: "vertical"
+ });
+rightLaneView.add(addNewMaterialBtn);
+
+var scrollView2 = Ti.UI.createScrollView({
+	top: 5,
+	layout: "vertical",
+	//top: 200,
+	//right: 10,
 	//backgroundColor:"#EEEEEE",
-	width:"50%"	});
-self.add(scrollView2);
+	//height:200,
+	width:"100%"	
+});
+rightLaneView.add(scrollView2);
+
+
 
 var tbl_data = [];
 var tbl_data_selected = [];
@@ -155,6 +181,13 @@ var popOverLabel = Ti.UI.createLabel({
 		fontSize: 24
 	}
 });
+var popOverButton = Ti.UI.createButton({
+	title: "Tilføj",
+	width: 100,
+	height: 50,
+	center: {x: 150, y: 260},
+	color: 'black'
+});
 var numberInputField = Ti.UI.createTextField({
 	width: 200,
 	height: 50,
@@ -185,11 +218,12 @@ var delButton = Ti.UI.createButton({
 	title: "Slet",
 	width: 100,
 	height: 50,
-	center: {x: 150, y: 250},
+	center: {x: 150, y: 260},
 	color: 'black'
 });
 popOverView.add(popOverLabel);
 popOverView.add(numberInputField);
+popOverView.add(popOverButton);
 popOver.add(popOverView);
 popOverViewRegged.add(popOverLabel);
 popOverViewRegged.add(numberInputFieldRegged);
@@ -218,9 +252,12 @@ tableView.addEventListener('click', function(e) {
 //HANDLER FOR RETURN ON NUMBER ENTERED - MATERIAL
 numberInputField.addEventListener('return',function(e){
 	if(checkRedundancy(currentEditElement.name)){
-		//TODO Currently interprets inputTextField.value as String = mathmatics are not right.	
+		//TODO Currently handles only int
 		console.log("Previous number:"+rdb.gDataElementByName(db.gDataElementByName(currentEditElement.name).name).number);
-		rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name),e.source.value);
+		var valuenumber = parseInt(e.source.value);
+		console.log(valuenumber);
+		var sum = rdb.gDataElementByName(db.gDataElementByName(currentEditElement.name).name).number+valuenumber;
+		rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name),sum);
 		populatorRDB(tbl_data_selected);
 		console.log("Number after:"+rdb.gDataElementByName(currentEditElement.name).number);
 	}else{
@@ -235,6 +272,29 @@ numberInputField.addEventListener('return',function(e){
 	
 	popOver.hide();
 });
+
+popOverButton.addEventListener('click',function(e){
+	if(checkRedundancy(currentEditElement.name)){
+		//TODO Currently handles only int
+		console.log("Previous number:"+rdb.gDataElementByName(db.gDataElementByName(currentEditElement.name).name).number);
+		var valuenumber = parseInt(numberInputField.value);
+		console.log(valuenumber);
+		var sum = rdb.gDataElementByName(db.gDataElementByName(currentEditElement.name).name).number+valuenumber;
+		rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name),sum);
+		populatorRDB(tbl_data_selected);
+		console.log("Number after:"+rdb.gDataElementByName(currentEditElement.name).number);
+	}else{
+		rdb.addDataElement(db.gDataElementByName(currentEditElement.name),numberInputField.value);
+		tbl_data_selected.push(
+					Ti.UI.createTableViewRow({
+						title:rdb.gDataElementByName(currentEditElement.name).number+"   "+currentEditElement.name
+					}))	
+	}
+	
+	updateTableViews();
+	popOver.hide();
+});
+
 //HANDLER FOR REGMATERIAL-CLICK
 tableViewSelected.addEventListener('click',function(e){
 	var nameOfMaterial = e.source.title.substr(e.source.title.indexOf(" ")+3,e.source.title.length);
@@ -337,6 +397,27 @@ nmPopOver.add(nmPopOverView);
 nmPopOverAddButton.addEventListener('click',function(e){
 	nmPopOver.hide();
 	nmPopOver.visible=false;
+	var searchQuery = searchBar.value;
+	var nameOfNewMaterial = searchQuery;
+	nameOfNewMaterial = nameOfNewMaterial.toLowerCase().charAt(0).toUpperCase()+nameOfNewMaterial.toLowerCase().substr(1,nameOfNewMaterial.length);
+	console.log("Adding "+nameOfNewMaterial+" to database");
+	db.addDataElementFromName(nameOfNewMaterial);
+	remotedb.postMaterial(nameOfNewMaterial);
+	populatorDB(tbl_data);
+	updateTableViews();
+	searchBar.value = "";
+	searchBar.value = searchQuery;
+	searchBar.focus();
+	self.fireEvent('breaksearch');
+});
+
+addNewMaterialBtn.addEventListener('click',function(e){
+	if(searchBar.value!==""){
+		if(nmPopOver.visible===true){
+			nmPopOver.hide();
+			nmPopOver.visible=false;
+		}
+	}
 	var searchQuery = searchBar.value;
 	var nameOfNewMaterial = searchQuery;
 	nameOfNewMaterial = nameOfNewMaterial.toLowerCase().charAt(0).toUpperCase()+nameOfNewMaterial.toLowerCase().substr(1,nameOfNewMaterial.length);
