@@ -23,7 +23,7 @@ function RemoteDatabase(DB) {
 			};
 		
 			loader.onerror = function(e){
-				alert("Tis: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" readystate: "+e.readystate);
+				//alert("Tis: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" readystate: "+e.readystate);
 			};
 			loader.send({
     			username:user,
@@ -68,7 +68,7 @@ function RemoteDatabase(DB) {
 		
 			loader2.onerror = function(e){
 				Ti.API.debug(e.error);
-				alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
+				//alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
 			};
 			loader2.send({
 				session: sessionId,
@@ -94,7 +94,7 @@ function RemoteDatabase(DB) {
 		};
 		
 		loaderM.onerror = function(e){
-			alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
+			//alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
 			return loadedMaterials=true;
 		};
 		loaderM.send();
@@ -114,7 +114,7 @@ function RemoteDatabase(DB) {
 		};
 		
 		loaderE.onerror = function(e){
-			alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
+			//alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
 			return loadedEmployees=true;
 		};
 		loaderE.send();
@@ -134,7 +134,7 @@ function RemoteDatabase(DB) {
 		};
 		
 		loaderA.onerror = function(e){
-			alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
+			//alert("Status: "+e.status+" Text: "+e.responseText+" Error: "+e.error+" READYSTATE: "+e.readystate);
 			return loadedAssignments=true;
 		};
 		loaderA.send();

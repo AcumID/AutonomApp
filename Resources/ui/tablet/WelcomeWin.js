@@ -50,8 +50,8 @@ function WelcomeWin(title) {
 	
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
-		top: 120,
-		font: {fontFamily:"Segoe UI", fontSize: 56}
+		top: 130,
+		font: {fontFamily:"Segoe UI", fontSize: 46}
 	})	
 	welcomeView.add(textField);
 	
@@ -186,7 +186,7 @@ function WelcomeWin(title) {
 		top:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		autocorrect:false,
-		font: {fontFamily:"Marker Felt", fontSize: 24},
+		font: {fontFamily:"Marker Felt", fontSize: 30},
 		backgroundImage: "none"
 		
 	});
@@ -215,9 +215,10 @@ function WelcomeWin(title) {
 	var tf2 = Titanium.UI.createButton({
 		title:assignment,
 		height:40,
+		width:100,
 		color: "black",
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		font: {fontFamily:"Marker Felt", fontSize: 24},
+		font: {fontFamily:"Marker Felt", fontSize: 30},
 		backgroundImage: "none"    //HOLD SÅ FINGRENE VÆK!!!!!!
 	});
 	
@@ -253,7 +254,7 @@ function WelcomeWin(title) {
 	var perOle = Ti.UI.createImageView({
 		image: '/images/PerOle.png',
 		right: 0,
-		top:145
+		top:150
 	});
 	self.add(perOle);
 	return self;
