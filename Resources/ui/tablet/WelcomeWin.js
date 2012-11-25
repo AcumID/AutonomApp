@@ -80,6 +80,7 @@ function WelcomeWin(title) {
 		var btn = Ti.UI.createButton({
 			title: name,
 			top: 130,
+			width: 150,
 			color: "black",
 			backgroundColor: "transparent",
 			font: {fontFamily:"Marker Felt", fontSize: 46},
@@ -215,7 +216,7 @@ function WelcomeWin(title) {
 	var tf2 = Titanium.UI.createButton({
 		title:assignment,
 		height:40,
-		width:100,
+		width:150,
 		color: "black",
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		font: {fontFamily:"Marker Felt", fontSize: 30},

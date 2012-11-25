@@ -246,7 +246,7 @@ tableView.addEventListener('click', function(e) {
 		
 		function displayPopOver(){
 			pickerView.removeEventListener('postlayout',displayPopOver);
-			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100+20*e.index}});
+			popOver.show({view:pickerView, rect:{height:200, width:200, x:-200, y:-100}});
 			numberInputField.focus();
 		};
 					

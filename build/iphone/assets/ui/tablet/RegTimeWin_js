@@ -170,12 +170,12 @@ function RegTimeWin(title) {
 		
 		
 		if (workersOnAssignment.length === 1){
-			label1.text = workersOnAssignment[0].firstName +' har lavet ' + assignment + ' pÂ ' + location +'\n\nDu har'
+			label1.text = workersOnAssignment[0].firstName +' har lavet ' + assignment + ' på ' + location +'\n\nDu har'
 		} else {
 			for (var i=0;i<workersOnAssignment.length-1;i++){
 				label1.text = label1.text + ' ' +workersOnAssignment[i].firstName + ' og ';
 			}
-			label1.text = label1.text + ' ' + workersOnAssignment[workersOnAssignment.length-1].firstName +' har lavet ' + assignment + ' pÂ ' + location +'\n\nI har';
+			label1.text = label1.text + ' ' + workersOnAssignment[workersOnAssignment.length-1].firstName +' har lavet ' + assignment + '\n på ' + location +'\n\nI har';
 		}
 		
 		view2.add(label1);
@@ -225,7 +225,7 @@ function RegTimeWin(title) {
 		
 		//materialelsite
 		
-		var MatListView = require("ui/common/MatListView");
+		var MatListView = require("ui/tablet/MatListView");
 		var matListView = new MatListView(regdb.gAll());
 		view3.add(matListView);
 		
@@ -293,7 +293,7 @@ function RegTimeWin(title) {
 			console.log(employees);
 			console.log(materials);
 			remotedb.poster(location,assignmentid,carhours,clientseen,clienttalked,employees,materials);
-			alert("Tak for i dag og kom godt hjem");
+			alert("Tak for i dag og kom godt hjem!");
 			//TODO Rinse?
 		});
 		

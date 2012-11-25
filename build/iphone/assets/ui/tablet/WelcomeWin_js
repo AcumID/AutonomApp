@@ -50,8 +50,8 @@ function WelcomeWin(title) {
 	
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
-		top: 120,
-		font: {fontFamily:"Segoe UI", fontSize: 56}
+		top: 130,
+		font: {fontFamily:"Segoe UI", fontSize: 46}
 	})	
 	welcomeView.add(textField);
 	
@@ -80,7 +80,6 @@ function WelcomeWin(title) {
 		var btn = Ti.UI.createButton({
 			title: name,
 			top: 130,
-			width:100,
 			color: "black",
 			backgroundColor: "transparent",
 			font: {fontFamily:"Marker Felt", fontSize: 46},
@@ -187,7 +186,7 @@ function WelcomeWin(title) {
 		top:10,
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		autocorrect:false,
-		font: {fontFamily:"Marker Felt", fontSize: 24},
+		font: {fontFamily:"Marker Felt", fontSize: 30},
 		backgroundImage: "none"
 		
 	});
@@ -219,7 +218,7 @@ function WelcomeWin(title) {
 		width:100,
 		color: "black",
 		borderStyle:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-		font: {fontFamily:"Marker Felt", fontSize: 24},
+		font: {fontFamily:"Marker Felt", fontSize: 30},
 		backgroundImage: "none"    //HOLD SÅ FINGRENE VÆK!!!!!!
 	});
 	

@@ -13,7 +13,7 @@ function MatListView(dbGALL) {
 			fontFamily: "Segoe UI"
 		},
 		bottom: 10,
-		left: "20%"
+		left: "10%"
 	});
 	self.add(label);
 	
