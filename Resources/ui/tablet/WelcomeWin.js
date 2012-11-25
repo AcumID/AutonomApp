@@ -42,7 +42,7 @@ function WelcomeWin(title) {
 	 Her Bygges f¯rste View, der kan Êndre hvilke personer der er pÂ arbejde
 	 * */
 	
-	var self = Ti.UI.createWindow({title:title, backgroundImage: "images/back.png", layout: 'vertical'});
+	var self = Ti.UI.createWindow({title:title, backgroundImage: "images/back.png", layout: 'vertical', barColor:"#FF6600"});
 	self.add(logo);
 	var welcomeView = Ti.UI.createView ({width:"90%", height:Ti.UI.SIZE, layout: 'horizontal'});
 	self.add(welcomeView);
@@ -50,8 +50,8 @@ function WelcomeWin(title) {
 	
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
-		top: 120,
-		font: {fontFamily:"Segoe UI", fontSize: 56}
+		top: 130,
+		font: {fontFamily:"Segoe UI", fontSize: 46}
 	})	
 	welcomeView.add(textField);
 	
@@ -80,6 +80,7 @@ function WelcomeWin(title) {
 		var btn = Ti.UI.createButton({
 			title: name,
 			top: 130,
+			width: 150,
 			color: "black",
 			backgroundColor: "transparent",
 			font: {fontFamily:"Marker Felt", fontSize: 46},
@@ -96,12 +97,10 @@ function WelcomeWin(title) {
 	var addBtn = Ti.UI.createButton({
 		top: -60,
 		right: 30,
-		title:'tilføj person',
-		font: {fontSize: 20},
+		title:'Tilføj person +',
+		font: {fontFamily: "Marker Felt", fontSize: 20},
 		color: "black",
-		backgroundImage: "none",
-		borderColor:"#525252",
-		borderRadius:1
+		backgroundImage: "none"
 	});
 	addBtn.addEventListener('click', function() {
 		createOgField();
@@ -174,7 +173,7 @@ function WelcomeWin(title) {
 	//build the location view
 	
 	var locationView = Ti.UI.createView ({
-		top: 30, width:"90%", height:"10%", layout: 'horizontal'});
+		top: 60, width:"90%", height:"10%", layout: 'horizontal'});
 	self.add(locationView);
 	
 	var textField2 = Ti.UI.createLabel({
@@ -188,7 +187,7 @@ function WelcomeWin(title) {
 		top:10,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		autocorrect:false,
-		font: {fontFamily:"Marker Felt", fontSize: 24},
+		font: {fontFamily:"Marker Felt", fontSize: 30},
 		backgroundImage: "none"
 		
 	});
@@ -205,7 +204,7 @@ function WelcomeWin(title) {
 	//add the assignment view
 	
 	var assignmentView = Ti.UI.createView ({
-		width:"90%", height:"10%", layout: 'horizontal'});
+		top:-20,width:"90%", height:"10%", layout: 'horizontal'});
 	self.add(assignmentView);
 	
 	var textField3 = Ti.UI.createLabel({
@@ -217,10 +216,10 @@ function WelcomeWin(title) {
 	var tf2 = Titanium.UI.createButton({
 		title:assignment,
 		height:40,
-		top:10,
+		width:150,
 		color: "black",
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		font: {fontFamily:"Marker Felt", fontSize: 24},
+		font: {fontFamily:"Marker Felt", fontSize: 30},
 		backgroundImage: "none"    //HOLD SÅ FINGRENE VÆK!!!!!!
 	});
 	
@@ -256,7 +255,7 @@ function WelcomeWin(title) {
 	var perOle = Ti.UI.createImageView({
 		image: '/images/PerOle.png',
 		right: 0,
-		top:170
+		top:150
 	});
 	self.add(perOle);
 	return self;

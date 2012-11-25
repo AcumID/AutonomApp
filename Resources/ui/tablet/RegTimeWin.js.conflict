@@ -12,7 +12,6 @@ var db = new Database();
 function RegTimeWin(title) {
 	var win = Ti.UI.createWindow({
 		title:title,
-		barColor:"#FF6600",
 		//backgroundColor:'white',
 		layout:'vertical'
 	});
@@ -45,9 +44,14 @@ function RegTimeWin(title) {
 	});
 		
 	function viewUpdater(){
+<<<<<<< HEAD
+	for (var i=0; i<workersOnAssignment.length; i++) {
+		console.log(workersOnAssignment[i]);
+=======
 		//Husk at opdater arrayet af perosner
 		workersOnAssignment=Ti.App.Properties.getList("workersOnAssignment",workersOnAssignment);
 		for (var i=0; i<workersOnAssignment.length; i++) {
+>>>>>>> 40aab490dc13d687cff8fb4951c21c73a5fbe646
 		workersOnAssignment[i].label = Ti.UI.createLabel({
 	  			top: 40,
 	  			font: {fontSize: 24},
@@ -64,10 +68,17 @@ function RegTimeWin(title) {
 	  	});
 		workersOnAssignment[i].slider.addEventListener("change", function(e){
 			var j = e.source.id;
+<<<<<<< HEAD
+			Ti.App.Properties.getList("workersOnAssignment",workersOnAssignment);
+=======
+>>>>>>> 40aab490dc13d687cff8fb4951c21c73a5fbe646
 
 			workersOnAssignment[j].workHours = Math.ceil(e.source.value);
 			workersOnAssignment[j].label.text = workersOnAssignment[j].firstName+" har arbejdet "+workersOnAssignment[j].workHours+" timer.";
 			Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
+			console.log("Setting workersOnAssignment: "+workersOnAssignment);
+			console.log("Workers hours [0]: "+workersOnAssignment[0].workHours);
+			console.log("Workers hours [1]: "+workersOnAssignment[1].workHours);
 		});
 
 
@@ -90,7 +101,7 @@ function RegTimeWin(title) {
 	  			min: 0,
 	  			max: 24,
 	  			width: "80%",
-	  			value: carHours
+	  			value: carHours,
 	 	 	});
 		carSlider.addEventListener("change", function(e){
 			carHours = Math.ceil(carSlider.value);
@@ -170,12 +181,12 @@ function RegTimeWin(title) {
 		
 		
 		if (workersOnAssignment.length === 1){
-			label1.text = workersOnAssignment[0].firstName +' har lavet ' + assignment + ' på ' + location +'\n\nDu har'
+			label1.text = workersOnAssignment[0].firstName +' har lavet ' + assignment + ' pÂ ' + location +'\n\nDu har'
 		} else {
 			for (var i=0;i<workersOnAssignment.length-1;i++){
 				label1.text = label1.text + ' ' +workersOnAssignment[i].firstName + ' og ';
 			}
-			label1.text = label1.text + ' ' + workersOnAssignment[workersOnAssignment.length-1].firstName +' har lavet ' + assignment + '\n på ' + location +'\n\nI har';
+			label1.text = label1.text + ' ' + workersOnAssignment[workersOnAssignment.length-1].firstName +' har lavet ' + assignment + ' pÂ ' + location +'\n\nI har';
 		}
 		
 		view2.add(label1);
@@ -225,7 +236,7 @@ function RegTimeWin(title) {
 		
 		//materialelsite
 		
-		var MatListView = require("ui/tablet/MatListView");
+		var MatListView = require("ui/common/MatListView");
 		var matListView = new MatListView(regdb.gAll());
 		view3.add(matListView);
 		
@@ -293,7 +304,7 @@ function RegTimeWin(title) {
 			console.log(employees);
 			console.log(materials);
 			remotedb.poster(location,assignmentid,carhours,clientseen,clienttalked,employees,materials);
-			alert("Tak for i dag og kom godt hjem!");
+			alert("Tak for i dag og kom godt hjem");
 			//TODO Rinse?
 		});
 		
