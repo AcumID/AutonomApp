@@ -30,13 +30,23 @@ function RegTimeWin(title) {
 	var apprenticeHours = 0;
 	var carHours = Ti.App.Properties.getInt("carHours",0);
 	
-	Ti.App.addEventListener('updateWorkersOnAssignment', function(){
 	
+	Ti.App.addEventListener('updateAssignment', function(){
+		assignment = Ti.App.Properties.getString('assignment');
+	});
+	
+	Ti.App.addEventListener('updateLocation',function(){
+		location = Ti.App.Properties.getString('location');
+	});
+	
+	Ti.App.addEventListener('updateWorkersOnAssignment', function(){
 		for (var d = holderView.children.length-1; d >= 0; d--) {
     		holderView.remove(holderView.children[d]);
 		}
-		workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment",[]);
+		workersOnAssignment = Ti.App.Properties.getList("workersOnAssignment");
 		viewUpdater();
+		journeymanHours = 0;
+		apprenticeHours = 0;
 	});
 		
 	var holderView = Ti.UI.createView({
@@ -159,7 +169,7 @@ function RegTimeWin(title) {
 		var title = Ti.UI.createLabel({
 			text: 'Dagens Dagseddel',
 			font: { fontSize:40 }	
-		})
+		});
 		view1.add(title);
 		
 		var label1 = Ti.UI.createLabel({
@@ -205,8 +215,11 @@ function RegTimeWin(title) {
 		view3.add(label4);
 		
 		// Antal arbejdstimer
+		if(journeymanHours !== 0 || apprenticeHours !== 0){
+			journeymanHours = 0;
+			apprenticeHours = 0;
+		};
 		for (var i=0; i < workersOnAssignment.length; i++) {
-			console.log(workersOnAssignment[i].isJourneyman);
 		 	if (workersOnAssignment[i].isJourneyman >0){
 		  		journeymanHours += workersOnAssignment[i].workHours;
 			} else {
@@ -249,8 +262,7 @@ function RegTimeWin(title) {
 					assignmentid=db.gAllAssignments()[i].id;
 				}	
 			}	
-			
-			var carhours = carHours;
+
 			
 			var clientseen;
 			if(seeCustomer===true){
@@ -290,10 +302,8 @@ function RegTimeWin(title) {
 				var matId = db.gDataElementByName(regdb.gAll()[i].name).id;
 				materials.push(new Material(matId,regdb.gAll()[i].number));
 			};
-			console.log(employees);
-			console.log(materials);
-			remotedb.poster(location,assignmentid,carhours,clientseen,clienttalked,employees,materials);
-			alert("Tak for i dag og kom godt hjem!");
+			remotedb.poster(location,assignmentid,carHours,clientseen,clienttalked,employees,materials);
+			alert("Tak for i dag og kom godt hjem! \n (Psst... Se dagens pigebarn?)");
 			//TODO Rinse?
 		});
 		

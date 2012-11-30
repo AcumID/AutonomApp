@@ -94,7 +94,7 @@ function Database() {
 		return results; //return an array of JavaScript objects reflecting the materials
 	};
 	
-	//Get all by assignment
+	//Get all where the first are based on assignment
 	api.gAllByAssignment = function(assignment){
 		var results = [];
 		var resultsToSort = [];
@@ -127,6 +127,40 @@ function Database() {
 				results.push(resultsToSort[place]);
 			}
 		}
+		
+		return results; //return an array of JavaScript objects reflecting the materials
+		
+	}
+	
+	//Get all where the first are based on assignment
+	api.gDataElementsByAssignment = function(assignment){
+		var results = [];
+		var resultsToSort = [];
+		//get dataelements from database
+		var resultSet = db.execute('SELECT * FROM materials');
+		while(resultSet.isValidRow()){
+			resultsToSort.push({
+				id: resultSet.fieldByName('id'),
+				stocknumber: resultSet.fieldByName('stocknumber'),
+				name: resultSet.fieldByName('name'),
+				unit: resultSet.fieldByName('unit'),
+				assignments: resultSet.fieldByName('assignments'),
+				image: resultSet.fieldByName('image'),
+				price: resultSet.fieldByName('price')
+			});
+			resultSet.next();
+		}
+		resultSet.close();
+		resultsToSort.sort();
+		for (place in resultsToSort){
+			if(resultsToSort[place].assignments!==null){
+				if (resultsToSort[place].assignments.indexOf(assignment)!==-1){
+					results.push(resultsToSort[place]);
+				}	
+			}
+		}
+		
+		//TODO it might be nessecary to include "if (results.indexOf(resultsToSort[place])===-1){" to avoid duplicates
 		
 		return results; //return an array of JavaScript objects reflecting the materials
 		

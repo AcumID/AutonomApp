@@ -26,6 +26,8 @@ function WelcomeWin(title) {
 	
 	//for making buttons in right order
 	var zIndexCounter = 1;
+	var currentZIndex;
+	var workersOnAssignmentIndex;
 
 	Ti.App.addEventListener('updatePersons', function(){
 		persons = Ti.App.Properties.getList('persons', []);
@@ -33,9 +35,6 @@ function WelcomeWin(title) {
 	
 	Ti.App.addEventListener('updateWorkersOnAssignment', function(){
 		workersOnAssignment = Ti.App.Properties.getList('workersOnAssignment', [])
-		/*
-			
-		}*/
 	});
 
 	/*
@@ -44,13 +43,13 @@ function WelcomeWin(title) {
 	
 	var self = Ti.UI.createWindow({title:title, backgroundImage: "images/back.png", layout: 'vertical', barColor:"#FF6600"});
 	self.add(logo);
-	var welcomeView = Ti.UI.createView ({width:"90%", height:Ti.UI.SIZE, layout: 'horizontal'});
+	var welcomeView = Ti.UI.createView ({top: 130, width:"90%", height:Ti.UI.SIZE, layout: 'horizontal'});
 	self.add(welcomeView);
 	
 	
 	var textField = Ti.UI.createLabel({
 		text: "Hej ",
-		top: 130,
+		//top: 130,
 		font: {fontFamily:"Segoe UI", fontSize: 46}
 	})	
 	welcomeView.add(textField);
@@ -70,7 +69,7 @@ function WelcomeWin(title) {
 	function createOgField(){
 		var textField = Ti.UI.createLabel({
 			text: " og ",
-			top: 130,
+			//top: 130,
 			font: {fontFamily:"Segoe UI", fontSize: 46}
 			})
 		zIndexCounter++;	
@@ -79,43 +78,58 @@ function WelcomeWin(title) {
 	function createPersonButton(name){
 		var btn = Ti.UI.createButton({
 			title: name,
-			top: 130,
-			width: 150,
+			//top: 130,
+			width: 200,
 			color: "black",
-			backgroundColor: "transparent",
 			font: {fontFamily:"Marker Felt", fontSize: 46},
 			zIndex:zIndexCounter,
-			backgroundImage: "none"
+			height: 50
+			//backgroundImage: "none"
 			
 		});
 		zIndexCounter++;	
 		btn.addEventListener('click', function(e){
-			createPersonPicker(name, btn.zIndex);
+			createPersonPicker(btn.title, btn.zIndex);
 		});
 		welcomeView.add(btn);
 	}
 	var addBtn = Ti.UI.createButton({
-		top: -60,
+		top: -46,
 		right: 30,
 		title:'Tilføj person +',
 		font: {fontFamily: "Marker Felt", fontSize: 20},
 		color: "black",
-		backgroundImage: "none"
+		height: 50,
+		backgroundImage: "none",
+		borderColor: "black",
+		height: 40,
+		width: 120,
+		borderRadius: 8
 	});
 	addBtn.addEventListener('click', function() {
-		createOgField();
+		if(workersOnAssignment[0]!==undefined||zIndexCounter>=2){
+			createOgField();
+		}
 		createPersonButton('Ny person');
 	});
 	self.add(addBtn);
 	
 	function createPersonPicker(currentName, zIndex){
+		currentZIndex=zIndex;
+		//console.log("WORKERSONASSIGNMENT > "+workersOnAssignment);
+		if(currentName!=="Ny person"){
+			for(var i=0; i<workersOnAssignment.length; i++){
+				if(workersOnAssignment[i].firstName===currentName){
+					workersOnAssignmentIndex=i;
+				}
+			};
+		} else {
+			workersOnAssignmentIndex=workersOnAssignment.length;
+		}
+		
+		
 		Ti.App.fireEvent('updatePersons');
 		var buttons = [];
-		/*
-		for (place in db.gAllEmployees()){
-			buttons.push(db.gAllEmployees()[place].name);
-			persons.push(db.gALLEmployees()[place]);
-		};*/
 		for(var i=0; i<persons.length; i++){
 			buttons.push(persons[i].firstName);
 		}
@@ -130,26 +144,26 @@ function WelcomeWin(title) {
 		var clickHandler = function(e){			
 			if(e.index === buttons.length - 2){  															
 				for (var g=0;g<workersOnAssignment.length;g++){
+					//console.log("Now testing "+currentName+" versus "+workersOnAssignment[g].firstName);
 					if(currentName === workersOnAssignment[g].firstName){
 						workersOnAssignment.splice(g,1);
+						//console.log("Splicing where current = "+currentName+" and now setting workers on assignment: "+workersOnAssignment);
 						Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
 					}
 				}
 				Ti.App.fireEvent('updateWorkersOnAssignment');
-				deleteButton(zIndex);
+				deleteButton(currentZIndex);
+				//TODO need to change zindex of other elements when deleting
 				for (var h=0;h<welcomeView.children.length;h++){
-					welcomeView.children[h].zIndex -=2;
+					if(welcomeView.children[h].zIndex>currentZIndex){
+						welcomeView.children[h].zIndex -=2;	
+					}
 				}				
 			} else if (e.index === buttons.length - 1) {
 				//nothing happens
 			} else {
-				workersOnAssignment[zIndex]=persons[e.index];
-				updateButton((workersOnAssignment[zIndex].firstName), zIndex);							
-				for (var i = workersOnAssignment.length;i>=0;i--){
-					if (workersOnAssignment[i] === undefined){
-						workersOnAssignment.splice(i,1);
-					} else {}
-				}
+				workersOnAssignment[workersOnAssignmentIndex]=persons[e.index];
+				updateButton((workersOnAssignment[workersOnAssignmentIndex].firstName), currentZIndex);
 				Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
 				Ti.App.fireEvent('updateWorkersOnAssignment');
 			}	
@@ -159,15 +173,24 @@ function WelcomeWin(title) {
 	}	
 	
 	function updateButton(newName, zIndex){
-		
 		welcomeView.children[zIndex].title = newName;
 	}
+	
 	function deleteButton(zIndex) {
+		//alert("THIS IS Z: "+zIndex);
+		var zIndexCounterToRemove=0;
 		welcomeView.remove(welcomeView.children[zIndex]);
-		welcomeView.remove(welcomeView.children[zIndex-1]);	
+		zIndexCounterToRemove++;	
+		if(zIndexCounter>2&&zIndex===1){
+			welcomeView.remove(welcomeView.children[zIndex]);
+			zIndexCounterToRemove++;
+		} else if(zIndexCounter>2){
+			welcomeView.remove(welcomeView.children[zIndex-1]);
+			zIndexCounterToRemove++;	
+		}
 		//Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
 		//Ti.App.fireEvent('updateWorkersOnAssignment');
-		zIndexCounter-=2;
+		zIndexCounter-=zIndexCounterToRemove;
 	}
 
 	//build the location view
@@ -185,10 +208,11 @@ function WelcomeWin(title) {
 	var tf1 = Titanium.UI.createTextField({
 		value:location,
 		top:10,
+		height:40,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		autocorrect:false,
-		font: {fontFamily:"Marker Felt", fontSize: 30},
-		backgroundImage: "none"
+		font: {fontFamily:"Marker Felt", fontSize: 30}
+		//backgroundImage: "none"
 		
 	});
 	tf1.addEventListener('return', function() {
@@ -198,6 +222,7 @@ function WelcomeWin(title) {
 	tf1.addEventListener('change', function(e) {
 		// save the text field's value 
 		Titanium.App.Properties.setString("location",e.value);
+		Ti.App.fireEvent("updateLocation");
 	});
 	locationView.add(tf1);	
 	
@@ -219,8 +244,8 @@ function WelcomeWin(title) {
 		width:150,
 		color: "black",
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		font: {fontFamily:"Marker Felt", fontSize: 30},
-		backgroundImage: "none"    //HOLD SÅ FINGRENE VÆK!!!!!!
+		font: {fontFamily:"Marker Felt", fontSize: 30}
+		//backgroundImage: "none"
 	});
 	
 	var assignmentNames=new Array();
@@ -248,6 +273,7 @@ function WelcomeWin(title) {
 		if(e.index!==assignmentNames.length){
 			Ti.App.Properties.setString("assignment",db.gAllAssignments()[e.index].name);
 			assignment = Ti.App.Properties.getString("assignment");
+			Ti.App.fireEvent("updateAssignment");
 			tf2.title=assignment;
 		}
 	};
@@ -255,7 +281,7 @@ function WelcomeWin(title) {
 	var perOle = Ti.UI.createImageView({
 		image: '/images/PerOle.png',
 		right: 0,
-		top:150
+		top:120
 	});
 	self.add(perOle);
 	return self;

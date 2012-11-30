@@ -74,13 +74,29 @@ var tbl_data_selected = [];
 //adds content to tbl data from DB
 function populatorDB(element){
 	var dataToPopulateWith=db.gAllByAssignment(assignment.toLowerCase());
-	for (place in dataToPopulateWith) {
+	
+	
+	var addition = 0;
+	var colorToUse = "#F7F0DE";
+	
+	for(var i=0; i<dataToPopulateWith.length+2; i++){
+		var nameOnRow = dataToPopulateWith[i-addition].name;
+		if(i===0){
+			colorToUse = "#F09E6C";
+			nameOnRow = "                "+assignment.toUpperCase();
+			addition++;	
+		}
+		if(i==db.gDataElementsByAssignment(assignment.toLowerCase()).length+1){
+			colorToUse = "#F7F0DE";
+			nameOnRow = "                ØVRIGE MATERIALER";
+			addition++;	
+		}
 		var row = Ti.UI.createTableViewRow({
-			backgroundColor:"#F7F0DE",
-			title: dataToPopulateWith[place].name
+			title: nameOnRow,
+			backgroundColor:colorToUse
 		});
-		element[place]=row;
-	};
+		element[i+addition]=row;
+	}
 };
 
 //adds content to tbl data selected from RDB
@@ -216,11 +232,20 @@ var numberInputFieldRegged = Ti.UI.createTextField({
 	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
 	clearOnEdit: false
 });
-var delButton = Ti.UI.createButton({
-	title: "Slet",
-	width: 100,
+
+var acceptButton = Ti.UI.createButton({
+	title: "Ændre antal",
+	width: 150,
 	height: 50,
 	center: {x: 150, y: 260},
+	color: 'black'
+});
+
+var delButton = Ti.UI.createButton({
+	title: "Fjern",
+	width: 150,
+	height: 50,
+	center: {x: 150, y: 320},
 	color: 'black'
 });
 popOverView.add(popOverLabel);
@@ -230,6 +255,7 @@ popOver.add(popOverView);
 popOverViewRegged.add(popOverLabel);
 popOverViewRegged.add(numberInputFieldRegged);
 popOverViewRegged.add(delButton);
+popOverViewRegged.add(acceptButton);
 popOverRegged.add(popOverViewRegged);
 
 //HANDLER FOR MATERIAL-CLICK
@@ -325,6 +351,15 @@ delButton.addEventListener('click',function(e){
 	populatorRDB(tbl_data_selected,true);
 	updateTableViews();
 });
+
+//HANDLER FOR ACCEPTBUT-CLICK
+acceptButton.addEventListener('click',function(e){
+	rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name), numberInputFieldRegged.value);
+	populatorRDB(tbl_data_selected);
+	updateTableViews();
+	popOverRegged.hide();
+});
+
 //HANDLER FOR RETURN ON INPUT NUMBER - REGMATERIAL
 numberInputFieldRegged.addEventListener('return',function(e){
 	rdb.updateDataElementNumber(rdb.gDataElementByName(currentEditElement.name), e.source.value);
@@ -459,20 +494,20 @@ var addMaterialFromSearch = function(){
 };
 
 //JONAS LEGER MED BROWSING
-var browseButton = Ti.UI.createButton({
-	right: 10,
-	title: "Gennemse katalog",
-	image: "/images/64.png" 
-});
-self.rightNavButton = browseButton;
-
-var BrowseMatWin = require("/ui/tablet/BrowseMatWin");
-
-browseButton.addEventListener("click", function(e) {
-	self.containingTab.open(
-	new BrowseMatWin()
-	)
-	});
+// var browseButton = Ti.UI.createButton({
+	// right: 10,
+	// title: "Gennemse katalog",
+	// image: "/images/64.png" 
+// });
+// self.rightNavButton = browseButton;
+// 
+// var BrowseMatWin = require("/ui/tablet/BrowseMatWin");
+// 
+// browseButton.addEventListener("click", function(e) {
+	// self.containingTab.open(
+	// new BrowseMatWin()
+	// )
+// });
 
 	return self;
 };
