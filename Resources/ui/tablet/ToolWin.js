@@ -23,22 +23,12 @@ function ToolWin(title) {
 	});
 	self.add(tf1);
 	
-	var tf2 = Titanium.UI.createTextField({
-		width:250,
-		height:40,
-		top:10,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		autocorrect:false
-	});
-	self.add(tf2);
-	
 	var isJourneymanPicker = Ti.UI.createSwitch({
 		value: true
 	});
 	self.add(isJourneymanPicker);
 	
-	var Person = function(firstName, name, isJourneyman){
-		this.firstName = firstName;
+	var Person = function(name, isJourneyman){
 		this.name = name;
 		this.isJourneyman = isJourneyman;
 		this.workHours = 0;
@@ -50,12 +40,11 @@ function ToolWin(title) {
 	});
 	
 	btn.addEventListener('click', function(e){
-		var person = new Person(tf1.value, tf2.value, isJourneymanPicker.value);
+		var person = new Person(tf1.value, isJourneymanPicker.value);
 		var persons = Ti.App.Properties.getList('persons', []);
 		persons.push(person);
 		Ti.App.Properties.setList('persons', persons);
 		tf1.value = "";
-		tf2.value = "";
 		Ti.App.fireEvent('updatePersons');
 	});
 	self.add(btn);
