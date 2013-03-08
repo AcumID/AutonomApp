@@ -122,43 +122,34 @@ populatorDB(tbl_data);
 populatorRDB(tbl_data_selected);
 
 //Creating Searchbar
-if(platform === "mobileweb"){
-	var searchBar = Ti.UI.createTextField({
- 		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
- 		center: 50,
- 		width: 250, 
- 		height: 40,
- 		colors: [ { color: 'red', offset: 0.0}, { color: 'blue', offset: 0.25 }, { color: 'red', offset: 1.0 } ] 
-	});
-} else {
-	var searchBar = Titanium.UI.createSearchBar({
-		backgroundColor: "#F7F0DE",
-		showCancel: false,
-		hintText: "Hvad leder du efter?",
-		barColor: "#CC6600"
-	});
-}
+var searchBar = Titanium.UI.createSearchBar({
+	backgroundColor: "#F7F0DE",
+	showCancel: false,
+	hintText: "Hvad leder du efter?",
+	barColor: "#CC6600"
+});
 scrollView.add(searchBar);
+
+//hide keyboard when clicking outside searchField
+self.addEventListener('click', function(e){
+	searchBar.blur();
+});
+
 
 var tableView = Titanium.UI.createTableView({
 	headerTitle:"Forslag",
 	search: searchBar,
-	backgroundColor:"transparent"
+	backgroundColor:"transparent",
+	style: Titanium.UI.iPhone.TableViewStyle.GROUPED
 });
-if(platform === "ipad"){
-	tableView.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
-}
-
 tableView.setData(tbl_data);
 scrollView.add(tableView);
 
 var tableViewSelected = Titanium.UI.createTableView({
 	headerTitle:"Valgte materialer",
-	backgroundColor:"transparent"
+	backgroundColor:"transparent",
+	style: Titanium.UI.iPhone.TableViewStyle.GROUPED
 });
-if(platform === "ipad"){
-	tableViewSelected.style = Titanium.UI.iPhone.TableViewStyle.GROUPED;
-}
 tableViewSelected.setData(tbl_data_selected);
 scrollView2.add(tableViewSelected);
 
