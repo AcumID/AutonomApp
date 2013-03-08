@@ -141,31 +141,34 @@ function WelcomeWin(title) {
 			destructive: persons.length
 		});
 		
-		var clickHandler = function(e){			
-			if(e.index === buttons.length - 2){  															
-				for (var g=0;g<workersOnAssignment.length;g++){
-					//console.log("Now testing "+currentName+" versus "+workersOnAssignment[g].name);
-					if(currentName === workersOnAssignment[g].name){
-						workersOnAssignment.splice(g,1);
-						//console.log("Splicing where current = "+currentName+" and now setting workers on assignment: "+workersOnAssignment);
-						Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
+		var clickHandler = function(e){	
+			if(e.source==="[object TiUIOptionDialog]")	
+			{	
+				if(e.index === buttons.length - 2){  															
+					for (var g=0;g<workersOnAssignment.length;g++){
+						//console.log("Now testing "+currentName+" versus "+workersOnAssignment[g].name);
+						if(currentName === workersOnAssignment[g].name){
+							workersOnAssignment.splice(g,1);
+							//console.log("Splicing where current = "+currentName+" and now setting workers on assignment: "+workersOnAssignment);
+							Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
+						}
 					}
+					Ti.App.fireEvent('updateWorkersOnAssignment');
+					deleteButton(currentZIndex);
+					//TODO need to change zindex of other elements when deleting
+					for (var h=0;h<welcomeView.children.length;h++){
+						if(welcomeView.children[h].zIndex>currentZIndex){
+							welcomeView.children[h].zIndex -=2;	
+						}
+					}				
+				} else if (e.index === buttons.length - 1) {
+					//nothing happens
+				} else {
+					workersOnAssignment[workersOnAssignmentIndex]=persons[e.index];
+					updateButton((workersOnAssignment[workersOnAssignmentIndex].name), currentZIndex);
+					Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
+					Ti.App.fireEvent('updateWorkersOnAssignment');
 				}
-				Ti.App.fireEvent('updateWorkersOnAssignment');
-				deleteButton(currentZIndex);
-				//TODO need to change zindex of other elements when deleting
-				for (var h=0;h<welcomeView.children.length;h++){
-					if(welcomeView.children[h].zIndex>currentZIndex){
-						welcomeView.children[h].zIndex -=2;	
-					}
-				}				
-			} else if (e.index === buttons.length - 1) {
-				//nothing happens
-			} else {
-				workersOnAssignment[workersOnAssignmentIndex]=persons[e.index];
-				updateButton((workersOnAssignment[workersOnAssignmentIndex].name), currentZIndex);
-				Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
-				Ti.App.fireEvent('updateWorkersOnAssignment');
 			}	
 		}			
 		nameList.addEventListener('click', clickHandler)
