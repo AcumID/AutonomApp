@@ -103,7 +103,7 @@ function RegTimeWin(title) {
 	  			value: carHours
 	 	 	});
 		carSlider.addEventListener("change", function(e){
-			carHours = Math.ceil(carSlider.value);
+			carHours = Math.round(carSlider.value*4)/4;
 			carLabel.text = "Bilen har været i brug i  "+carHours+" timer.";
 			Ti.App.Properties.setInt("carHours",carHours);
 		});
