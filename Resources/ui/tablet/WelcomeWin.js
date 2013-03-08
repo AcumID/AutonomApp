@@ -215,10 +215,17 @@ function WelcomeWin(title) {
 		//backgroundImage: "none"
 		
 	});
+	// hide the keyboard on clicking return button
 	tf1.addEventListener('return', function() {
-		// hide the keyboard
+		
 		tf1.blur();
 	});
+	
+	//hide keyboard when clicking anywhere else in the window
+	self.addEventListener('click', function(e){
+		tf1.blur();
+	});
+	
 	tf1.addEventListener('change', function(e) {
 		// save the text field's value 
 		Titanium.App.Properties.setString("location",e.value);
