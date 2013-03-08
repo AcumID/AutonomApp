@@ -74,8 +74,8 @@ function RegTimeWin(title) {
 	  	});
 		workersOnAssignment[i].slider.addEventListener("change", function(e){
 			var j = e.source.id;
-
-			workersOnAssignment[j].workHours = Math.ceil(e.source.value);
+			
+			workersOnAssignment[j].workHours = Math.round(e.source.value*4)/4;
 			workersOnAssignment[j].label.text = workersOnAssignment[j].name+" har arbejdet "+workersOnAssignment[j].workHours+" timer.";
 			Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
 		});
