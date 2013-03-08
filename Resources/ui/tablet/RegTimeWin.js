@@ -61,7 +61,7 @@ function RegTimeWin(title) {
 		workersOnAssignment[i].label = Ti.UI.createLabel({
 	  			top: 40,
 	  			font: {fontSize: 24},
-	  			text: workersOnAssignment[i].firstName+" har arbejdet "+workersOnAssignment[i].workHours+" timer.",
+	  			text: workersOnAssignment[i].name+" har arbejdet "+workersOnAssignment[i].workHours+" timer.",
 	  			width: Ti.UI.SIZE
 	  	});
 	  	workersOnAssignment[i].slider = Titanium.UI.createSlider({
@@ -76,7 +76,7 @@ function RegTimeWin(title) {
 			var j = e.source.id;
 
 			workersOnAssignment[j].workHours = Math.ceil(e.source.value);
-			workersOnAssignment[j].label.text = workersOnAssignment[j].firstName+" har arbejdet "+workersOnAssignment[j].workHours+" timer.";
+			workersOnAssignment[j].label.text = workersOnAssignment[j].name+" har arbejdet "+workersOnAssignment[j].workHours+" timer.";
 			Ti.App.Properties.setList("workersOnAssignment",workersOnAssignment);
 		});
 
@@ -180,12 +180,12 @@ function RegTimeWin(title) {
 		
 		
 		if (workersOnAssignment.length === 1){
-			label1.text = workersOnAssignment[0].firstName +' har lavet ' + assignment + ' på ' + location +'\n\nDu har'
+			label1.text = workersOnAssignment[0].name +' har lavet ' + assignment + ' på ' + location +'\n\nDu har'
 		} else {
 			for (var i=0;i<workersOnAssignment.length-1;i++){
-				label1.text = label1.text + ' ' +workersOnAssignment[i].firstName + ' og ';
+				label1.text = label1.text + ' ' +workersOnAssignment[i].name + ' og ';
 			}
-			label1.text = label1.text + ' ' + workersOnAssignment[workersOnAssignment.length-1].firstName +' har lavet ' + assignment + '\n på ' + location +'\n\nI har';
+			label1.text = label1.text + ' ' + workersOnAssignment[workersOnAssignment.length-1].name +' har lavet ' + assignment + '\n på ' + location +'\n\nI har';
 		}
 		
 		view2.add(label1);
@@ -286,7 +286,7 @@ function RegTimeWin(title) {
 			for (place in workersOnAssignment){
 				var employeeId;
 				for(var i=0; i<db.gAllAssignments().length;i++){
-					if(db.gAllEmployees()[i].name===workersOnAssignment[place].firstName){
+					if(db.gAllEmployees()[i].name===workersOnAssignment[place].name){
 						employeeId=db.gAllEmployees()[i].id;
 					}	
 				}	

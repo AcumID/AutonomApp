@@ -56,10 +56,10 @@ function WelcomeWin(title) {
 	
 	//adds the persons currently on the assignment with 'og' inbetween
 	if(workersOnAssignment.length === 1){
-			createPersonButton(workersOnAssignment[0].firstName);
+			createPersonButton(workersOnAssignment[0].name);
 	} else {
 		for (var i=0;i<workersOnAssignment.length;i++){
-			createPersonButton(workersOnAssignment[i].firstName);
+			createPersonButton(workersOnAssignment[i].name);
 			if (i+1<workersOnAssignment.length){
 				createOgField();
 			}			
@@ -119,7 +119,7 @@ function WelcomeWin(title) {
 		//console.log("WORKERSONASSIGNMENT > "+workersOnAssignment);
 		if(currentName!=="Ny person"){
 			for(var i=0; i<workersOnAssignment.length; i++){
-				if(workersOnAssignment[i].firstName===currentName){
+				if(workersOnAssignment[i].name===currentName){
 					workersOnAssignmentIndex=i;
 				}
 			};
@@ -131,7 +131,7 @@ function WelcomeWin(title) {
 		Ti.App.fireEvent('updatePersons');
 		var buttons = [];
 		for(var i=0; i<persons.length; i++){
-			buttons.push(persons[i].firstName);
+			buttons.push(persons[i].name);
 		}
 		buttons.push('Slet');
 		buttons.push('Annuller');
@@ -144,8 +144,8 @@ function WelcomeWin(title) {
 		var clickHandler = function(e){			
 			if(e.index === buttons.length - 2){  															
 				for (var g=0;g<workersOnAssignment.length;g++){
-					//console.log("Now testing "+currentName+" versus "+workersOnAssignment[g].firstName);
-					if(currentName === workersOnAssignment[g].firstName){
+					//console.log("Now testing "+currentName+" versus "+workersOnAssignment[g].name);
+					if(currentName === workersOnAssignment[g].name){
 						workersOnAssignment.splice(g,1);
 						//console.log("Splicing where current = "+currentName+" and now setting workers on assignment: "+workersOnAssignment);
 						Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
@@ -163,7 +163,7 @@ function WelcomeWin(title) {
 				//nothing happens
 			} else {
 				workersOnAssignment[workersOnAssignmentIndex]=persons[e.index];
-				updateButton((workersOnAssignment[workersOnAssignmentIndex].firstName), currentZIndex);
+				updateButton((workersOnAssignment[workersOnAssignmentIndex].name), currentZIndex);
 				Ti.App.Properties.setList('workersOnAssignment', workersOnAssignment);
 				Ti.App.fireEvent('updateWorkersOnAssignment');
 			}	

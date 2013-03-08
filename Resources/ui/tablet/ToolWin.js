@@ -37,9 +37,9 @@ function ToolWin(title) {
 	});
 	self.add(isJourneymanPicker);
 	
-	var Person = function(firstName, lastName, isJourneyman){
+	var Person = function(firstName, name, isJourneyman){
 		this.firstName = firstName;
-		this.lastName = lastName;
+		this.name = name;
 		this.isJourneyman = isJourneyman;
 		this.workHours = 0;
 	}
