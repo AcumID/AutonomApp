@@ -75,7 +75,6 @@ var tbl_data_selected = [];
 function populatorDB(element){
 	var dataToPopulateWith=db.gAllByAssignment(assignment.toLowerCase());
 	
-	
 	var addition = 0;
 	var colorToUse = "#F7F0DE";
 	
@@ -134,7 +133,6 @@ scrollView.add(searchBar);
 self.addEventListener('click', function(e){
 	searchBar.blur();
 });
-
 
 var tableView = Titanium.UI.createTableView({
 	headerTitle:"Forslag",
